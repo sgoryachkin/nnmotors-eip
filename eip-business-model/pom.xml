@@ -21,7 +21,7 @@
 
 	<build>
 		<plugins>
-		
+
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
@@ -35,7 +35,14 @@
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
-			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<configuration>
+					<excludeFilterFile>findbugs-exclude.xml</excludeFilterFile>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 </project>
