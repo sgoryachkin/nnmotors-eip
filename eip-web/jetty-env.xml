@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+
+	<!-- Data source for debug with embedded Jetty server -->
+	
+	<New id="serviceMessagesDataSource" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg>jdbc/serviceMessagesDataSource</Arg>
+		<Arg>
+			<New class="org.apache.commons.dbcp.BasicDataSource">
+				<Set name="driverClassName">org.hsqldb.jdbc.JDBCDriver</Set>
+				<Set name="url">jdbc:hsqldb:file:target/testdb</Set>
+				<Set name="username">sa</Set>
+				<Set name="password"></Set>
+			</New>
+		</Arg>
+	</New>
+</Configure>
