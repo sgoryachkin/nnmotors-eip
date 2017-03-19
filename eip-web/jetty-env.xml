@@ -3,7 +3,6 @@
 <Configure class="org.eclipse.jetty.webapp.WebAppContext">
 
 	<!-- Data source for debug with embedded Jetty server -->
-	
 	<New id="serviceMessagesDataSource" class="org.eclipse.jetty.plus.jndi.Resource">
 		<Arg>jdbc/serviceMessagesDataSource</Arg>
 		<Arg>
@@ -15,4 +14,19 @@
 			</New>
 		</Arg>
 	</New>
+
+	<!-- Add an EnvEntry only valid for this webapp -->
+	<New id="nnmotors.eip.authProvider" class="org.eclipse.jetty.plus.jndi.EnvEntry">
+		<Arg>gargle</Arg>
+		<Arg type="java.lang.String">100</Arg>
+		<Arg type="boolean">true</Arg>
+	</New>
+	
+	<!-- Add an EnvEntry only valid for this webapp -->
+	<New id="nnmotors.eip.activeDirectoryUrl" class="org.eclipse.jetty.plus.jndi.EnvEntry">
+		<Arg>gargle</Arg>
+		<Arg type="java.lang.String">100</Arg>
+		<Arg type="boolean">true</Arg>
+	</New>
+	
 </Configure>

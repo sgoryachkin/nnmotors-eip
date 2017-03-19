@@ -72,6 +72,12 @@
 
 			<dependency>
 				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${org.springframework.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
 				<artifactId>spring-webmvc</artifactId>
 				<version>${org.springframework.version}</version>
 			</dependency>
@@ -292,6 +298,11 @@
 							<groupId>org.hsqldb</groupId>
 							<artifactId>hsqldb</artifactId>
 							<version>2.3.4</version>
+						</dependency>
+						<dependency>
+							<groupId>ru.nnmotors.eip</groupId>
+							<artifactId>eip-dev</artifactId>
+							<version>${project.version}</version>
 						</dependency>
 					</dependencies>
 				</plugin>

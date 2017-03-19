@@ -13,10 +13,16 @@
 		
 	<import resource="classpath*:ru/nnmotors/eip/business/impl/config/*.xml"/>
 	
+	<bean id="activeDirectoryAuthenticationProvider" class="ru.nnmotors.eip.dev.auth.AuthProvider">
+
+	</bean>
+	
+	<bean id="eipAuthenticationProvider" class="ru.nnmotors.eip.web.common.auth.EipAuthenticationProvider">
+		<property name="authenticationProvider" ref="activeDirectoryAuthenticationProvider"/>
+	</bean>
+	
 	<security:authentication-manager>
-		<security:authentication-provider user-service-ref="userService" >
-			<security:password-encoder ref="passwordEncoder"/>
-		</security:authentication-provider>
+		<security:authentication-provider ref="eipAuthenticationProvider"/>
 	</security:authentication-manager>
 
 	<security:http use-expressions="true">
@@ -32,7 +38,6 @@
 								access="hasRole(T(com.lexx7.servicemessages.model.security.UserRole).ROLE_USER.name())"/>
 		<security:intercept-url pattern="/user/**"
 								access="hasRole(T(com.lexx7.servicemessages.model.security.UserRole).ROLE_ADMIN.name())"/>
-        <security:intercept-url pattern="/registration" access="permitAll"/>
         <security:intercept-url pattern="/login" access="permitAll"/>
 
         <security:form-login login-page="/login" default-target-url="/main" authentication-failure-url="/login?error=true"/>

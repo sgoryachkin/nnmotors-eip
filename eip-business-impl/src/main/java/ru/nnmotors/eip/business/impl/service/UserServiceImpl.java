@@ -11,11 +11,15 @@ import javax.persistence.criteria.Root;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ru.nnmotors.eip.business.api.service.UserService;
 import ru.nnmotors.eip.business.model.entity.User;
 import ru.nnmotors.eip.business.model.entity.User_;
 
+@Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
