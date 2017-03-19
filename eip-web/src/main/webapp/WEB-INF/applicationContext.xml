@@ -12,6 +12,12 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 		
 	<import resource="classpath*:ru/nnmotors/eip/business/impl/config/*.xml"/>
+	
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="userService" >
+			<security:password-encoder ref="passwordEncoder"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
 
 	<security:http use-expressions="true">
 	 	<security:intercept-url pattern="/main"

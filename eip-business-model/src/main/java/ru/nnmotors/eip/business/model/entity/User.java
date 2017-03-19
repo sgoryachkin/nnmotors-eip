@@ -20,30 +20,24 @@ public class User {
 	@Id
     @GeneratedValue
     private Long id;
+	
+    @Column(unique = true, nullable = false)
+    private String login;
 
-    @Column(name = "create_time")
+    @Column
     private Date createTime;
 
-    @Column(name = "edit_time")
-    private Date editTime;
-
-    @Column(name = "first_name")
+    @Column
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column
     private String lastName;
 
-    @Column(name = "middle_name")
+    @Column
     private String middleName;
 
     @Column
     private String email;
-
-    @Column(unique = true)
-    private String login;
-
-    @Column
-    private String password;
 
     @Column
     private boolean admin = false;
@@ -69,18 +63,6 @@ public class User {
     	// FindBug: EI_EXPOSE_REP2
     	// java.util.Date is mutable object
 		this.createTime =  new Date(createTime.getTime());
-	}
-
-	public Date getEditTime() {
-    	// FindBug: EI_EXPOSE_REP2
-    	// java.util.Date is mutable object
-		return new Date(editTime.getTime());
-	}
-
-	public void setEditTime(Date editTime) {
-    	// FindBug: EI_EXPOSE_REP2
-    	// java.util.Date is mutable object
-		this.editTime = new Date(editTime.getTime());
 	}
 
 	public String getFirstName() {
@@ -121,14 +103,6 @@ public class User {
 
 	public void setLogin(String login) {
 		this.login = login;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public boolean isAdmin() {

@@ -16,6 +16,7 @@
 	<context:component-scan base-package="com.lexx7.servicemessages.business" />
 
 	<tx:annotation-driven />
+	
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
@@ -25,11 +26,11 @@
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-				<property name="generateDdl" value="true" /><!-- для продакшена выключить -->
+				<property name="generateDdl" value="true" />
 				<property name="showSql" value="true" />
 			</bean>
 		</property>
-		<property name="packagesToScan" value="com.lexx7.servicemessages.model.entity" />
+		<property name="packagesToScan" value="ru.nnmotors.eip.business.model.entity" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaProperties">
 			<props>
@@ -39,36 +40,10 @@
 		</property>
 	</bean>
 
-	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/serviceMessagesDataSource" />
+	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/eipDataSource" />
 	
 	<!-- Security -->
 	
-	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
-	<security:authentication-manager>
-		<security:authentication-provider user-service-ref="userService" >
-			<security:password-encoder ref="passwordEncoder"/>
-		</security:authentication-provider>
-	</security:authentication-manager>
-	
-	<security:http use-expressions="true">
-	 	<security:intercept-url pattern="/main"
-								access="hasRole(T(com.lexx7.servicemessages.model.security.UserRole).ROLE_USER.name())"/>
-	 	<security:intercept-url pattern="/"
-								access="hasRole(T(com.lexx7.servicemessages.model.security.UserRole).ROLE_USER.name())"/>
-	 	<security:intercept-url pattern="/message/**"
-								access="hasRole(T(com.lexx7.servicemessages.model.security.UserRole).ROLE_USER.name())"/>
-	 	<security:intercept-url pattern="/address-book/**"
-								access="hasRole(T(com.lexx7.servicemessages.model.security.UserRole).ROLE_USER.name())"/>
-		<security:intercept-url pattern="/replace-password/**"
-								access="hasRole(T(com.lexx7.servicemessages.model.security.UserRole).ROLE_USER.name())"/>
-		<security:intercept-url pattern="/user/**"
-								access="hasRole(T(com.lexx7.servicemessages.model.security.UserRole).ROLE_ADMIN.name())"/>
-        <security:intercept-url pattern="/registration" access="permitAll"/>
-        <security:intercept-url pattern="/login" access="permitAll"/>
-
-        <security:form-login login-page="/login" default-target-url="/main" authentication-failure-url="/login?error=true"/>
-        <security:logout logout-url="/logout" logout-success-url="/login"/>
-    </security:http>
 
 </beans>
