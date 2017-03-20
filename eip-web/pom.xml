@@ -50,10 +50,15 @@
 		</dependency>
 
 		<!-- Spring Security -->
-		
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-ldap</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
 		</dependency>
 
 		<dependency>
@@ -81,6 +86,28 @@
 		</dependency>
 
 		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+
+		<!-- Handle all logging APIs over slf4j API -->
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
@@ -88,6 +115,13 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>ru.nnmotors.eip</groupId>
+			<artifactId>eip-dev</artifactId>
+			<scope>test</scope>
+			<version>${project.version}</version>
 		</dependency>
 
 	</dependencies>
@@ -100,7 +134,7 @@
 				<configuration>
 					<jettyXml>jetty-env.xml</jettyXml>
 					<webApp>
-						<contextPath>/dev-eip-nnmotors</contextPath>
+						<contextPath>/jetty-dev</contextPath>
 					</webApp>
 				</configuration>
 			</plugin>
