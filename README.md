@@ -1,5 +1,5 @@
 # nnmotors-eip [![Build Status](https://travis-ci.org/sgoryachkin/nnmotors-eip.svg?branch=master)](https://travis-ci.org/sgoryachkin/nnmotors-eip)
-## Development Guid
+## Development Guide
 To build project:
 ```
 .../nnmotors-eip $ mvn clean install
