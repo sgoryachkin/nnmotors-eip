@@ -12,7 +12,7 @@
 	
 	<context:annotation-config/>
 	
-	<context:component-scan base-package="com.lexx7.servicemessages.web"/>
+	<context:component-scan base-package="ru.nnmotors.eip.web.ui"/>
 	
 	<mvc:annotation-driven/>
 	

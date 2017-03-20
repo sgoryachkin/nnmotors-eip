@@ -13,6 +13,10 @@
 		
 	<import resource="classpath*:ru/nnmotors/eip/business/impl/config/*.xml"/>
 	
+	<context:annotation-config/>
+	
+	<context:component-scan base-package="ru.nnmotors.eip.web.common"/>
+	
 	<bean id="activeDirectoryAuthenticationProvider" class="ru.nnmotors.eip.dev.auth.AuthProvider">
 
 	</bean>
