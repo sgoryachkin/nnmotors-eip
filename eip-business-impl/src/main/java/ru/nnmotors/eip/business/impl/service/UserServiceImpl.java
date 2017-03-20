@@ -3,6 +3,7 @@ package ru.nnmotors.eip.business.impl.service;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -11,12 +12,14 @@ import javax.persistence.criteria.Root;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ru.nnmotors.eip.business.api.model.entity.User;
+import ru.nnmotors.eip.business.api.service.SecurityService;
 import ru.nnmotors.eip.business.api.service.UserService;
-import ru.nnmotors.eip.business.model.entity.User;
-import ru.nnmotors.eip.business.model.entity.User_;
+import ru.nnmotors.eip.business.api.model.entity.User_;
 
 @Service
 @Transactional
@@ -26,6 +29,9 @@ public class UserServiceImpl implements UserService {
 
 	@PersistenceContext
 	private EntityManager em;
+	
+	@Autowired
+	private SecurityService securityService;
 
 	@Override
 	public Long createUser(User user) {
@@ -34,17 +40,18 @@ public class UserServiceImpl implements UserService {
 		LOGGER.debug("User created: " + user.getId());
 		return user.getId();
 	}
-
+	
 	@Override
-	public void updateUser(User user) {
-		em.merge(user);
-		LOGGER.debug("User edit: " + user.getId());
+	public void removeUser(Long id) {
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void removeUser(Long id) {
-		// TODO Auto-generated method stub
+	public void updateUser(User user) {
+		securityService.checkUser(user.getId());
+		em.merge(user);
+		LOGGER.debug("User edit: " + user.getId());
 
 	}
 
@@ -66,7 +73,11 @@ public class UserServiceImpl implements UserService {
 		Root<User> root = criteria.from(User.class);
 		Predicate loginPredicate = criteriaBuilder.equal(root.get(User_.login), login);
 
-		return em.createQuery(criteria.where(loginPredicate)).getSingleResult();
+		try {
+			return em.createQuery(criteria.where(loginPredicate)).getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

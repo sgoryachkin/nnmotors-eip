@@ -8,7 +8,6 @@
 
 	<modules>
 		<module>eip-parent</module>
-		<module>eip-business-model</module>
 		<module>eip-business-api</module>
 		<module>eip-business-impl</module>
 		<module>eip-web</module>

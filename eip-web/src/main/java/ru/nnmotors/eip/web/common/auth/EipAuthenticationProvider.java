@@ -7,8 +7,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.transaction.annotation.Transactional;
 
+import ru.nnmotors.eip.business.api.model.entity.User;
 import ru.nnmotors.eip.business.api.service.UserService;
-import ru.nnmotors.eip.business.model.entity.User;
 
 public class EipAuthenticationProvider implements AuthenticationProvider {
 	

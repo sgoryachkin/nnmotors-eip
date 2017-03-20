@@ -1,4 +1,4 @@
-package ru.nnmotors.eip.business.model.entity;
+package ru.nnmotors.eip.business.api.model.entity;
 
 
 import javax.persistence.*;

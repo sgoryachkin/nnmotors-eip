@@ -1,6 +1,6 @@
 package ru.nnmotors.eip.business.api.service;
 
-import ru.nnmotors.eip.business.model.entity.User;
+import ru.nnmotors.eip.business.api.model.entity.User;
 
 public interface UserService {
 	
