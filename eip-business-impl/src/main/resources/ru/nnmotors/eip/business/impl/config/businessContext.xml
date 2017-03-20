@@ -30,7 +30,7 @@
 				<property name="showSql" value="true" />
 			</bean>
 		</property>
-		<property name="packagesToScan" value="ru.nnmotors.eip.business.model.entity" />
+		<property name="packagesToScan" value="ru.nnmotors.eip.business.api.model.entity" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaProperties">
 			<props>

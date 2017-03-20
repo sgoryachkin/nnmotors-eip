@@ -16,8 +16,8 @@
 	
 	<mvc:annotation-driven/>
 	
-	<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/" cache-period="86400"/>
-	<mvc:resources mapping="/js/**" location="/static/js/" cache-period="60"/>
+	<mvc:resources mapping="/static/webjars/**" location="classpath:/META-INF/resources/webjars/" cache-period="86400"/>
+	<mvc:resources mapping="/static/js/**" location="/static/js/" cache-period="60"/>
 
 	<!-- Map GET /login page to logic-less view controller (without controller 
 	     implementation. To submit login form used Login Spring Security Filter) -->

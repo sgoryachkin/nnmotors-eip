@@ -32,18 +32,8 @@
 	</security:authentication-manager>
 
 	<security:http use-expressions="true">
-	 	<security:intercept-url pattern="/main"
-								access="hasRole(T(com.lexx7.servicemessages.model.security.UserRole).ROLE_USER.name())"/>
-	 	<security:intercept-url pattern="/"
-								access="hasRole(T(com.lexx7.servicemessages.model.security.UserRole).ROLE_USER.name())"/>
-	 	<security:intercept-url pattern="/message/**"
-								access="hasRole(T(com.lexx7.servicemessages.model.security.UserRole).ROLE_USER.name())"/>
-	 	<security:intercept-url pattern="/address-book/**"
-								access="hasRole(T(com.lexx7.servicemessages.model.security.UserRole).ROLE_USER.name())"/>
-		<security:intercept-url pattern="/replace-password/**"
-								access="hasRole(T(com.lexx7.servicemessages.model.security.UserRole).ROLE_USER.name())"/>
 		<security:intercept-url pattern="/user/**"
-								access="hasRole(T(com.lexx7.servicemessages.model.security.UserRole).ROLE_ADMIN.name())"/>
+								access="hasRole(T(ru.nnmotors.eip.business.api.model.UserRole).ROLE_USER.name())"/>
         <security:intercept-url pattern="/login" access="permitAll"/>
 
         <security:form-login login-page="/login" default-target-url="/main" authentication-failure-url="/login?error=true"/>
