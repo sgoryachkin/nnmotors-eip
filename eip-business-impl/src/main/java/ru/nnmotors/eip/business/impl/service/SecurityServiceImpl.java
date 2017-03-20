@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ru.nnmotors.eip.business.api.model.UserRole;
 import ru.nnmotors.eip.business.api.model.entity.User;
@@ -19,6 +21,8 @@ import ru.nnmotors.eip.business.api.model.exception.SecurityCheckException;
 import ru.nnmotors.eip.business.api.model.exception.UserAccessCheckException;
 import ru.nnmotors.eip.business.api.service.SecurityService;
 
+@Service
+@Transactional
 public class SecurityServiceImpl implements SecurityService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SecurityServiceImpl.class);

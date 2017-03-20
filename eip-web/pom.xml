@@ -21,6 +21,13 @@
 			<artifactId>eip-business-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>ru.nnmotors.eip</groupId>
+			<artifactId>eip-business-impl</artifactId>
+			<scope>runtime</scope>
+			<version>${project.version}</version>
+		</dependency>
 
 		<!-- Standart javax API -->
 
@@ -120,7 +127,6 @@
 		<dependency>
 			<groupId>ru.nnmotors.eip</groupId>
 			<artifactId>eip-dev</artifactId>
-			<scope>test</scope>
 			<version>${project.version}</version>
 		</dependency>
 
