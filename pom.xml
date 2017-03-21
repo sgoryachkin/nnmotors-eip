@@ -11,6 +11,7 @@
 		<module>eip-business-api</module>
 		<module>eip-business-impl</module>
 		<module>eip-web</module>
+		
 		<module>eip-dev</module>
 	</modules>
 	
