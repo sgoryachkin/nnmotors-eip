@@ -1,4 +1,4 @@
-package ru.nnmotors.eip.web.ui.pages.portal;
+package ru.nnmotors.eip.web.ui.pages;
 
 import java.io.Serializable;
 
@@ -8,6 +8,8 @@ public class HeaderData implements Serializable {
 
 	
 	private String currentUserId;
+	
+	private String currentUserName;
 
 	public String getCurrentUserId() {
 		return currentUserId;
@@ -16,5 +18,14 @@ public class HeaderData implements Serializable {
 	public void setCurrentUserId(String currentUserId) {
 		this.currentUserId = currentUserId;
 	}
+
+	public String getCurrentUserName() {
+		return currentUserName;
+	}
+
+	public void setCurrentUserName(String currentUserName) {
+		this.currentUserName = currentUserName;
+	}
+
 
 }

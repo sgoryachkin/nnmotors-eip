@@ -26,7 +26,7 @@ public class DelegateAuthenticationProvider implements AuthenticationProvider {
 			user.setLogin(authenticationResult.getName());
 			userService.createUser(user);
 		}
-		return authentication;
+		return authenticationResult;
 	}
 
 	@Override

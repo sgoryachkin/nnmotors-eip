@@ -22,7 +22,6 @@
 	<!-- Map GET /login page to logic-less view controller (without controller 
 	     implementation. To submit login form used Login Spring Security Filter) -->
 	<mvc:view-controller path="/login" view-name="login"/>
-	<mvc:view-controller path="/" view-name="main" />
     
     <bean id="viewResolver"  
         class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>

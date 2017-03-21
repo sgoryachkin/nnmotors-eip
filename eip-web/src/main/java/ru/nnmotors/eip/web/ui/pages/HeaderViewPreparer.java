@@ -1,5 +1,4 @@
-package ru.nnmotors.eip.web.ui.pages.portal;
-
+package ru.nnmotors.eip.web.ui.pages;
 
 import org.apache.tiles.Attribute;
 import org.apache.tiles.AttributeContext;
@@ -9,19 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
+import ru.nnmotors.eip.business.api.model.entity.UserProfile;
 import ru.nnmotors.eip.business.api.service.UserService;
+import ru.nnmotors.eip.web.common.util.AttributeUtils;
 
 @Component
 public class HeaderViewPreparer implements ViewPreparer {
 
-	/**
-	 * HEADER_DATA_ATTRIBUTE name
-	 * 
-	 * Name and Class name is same, but first symbol in lowcase. "headerData"
-	 */
-	public static final String HEADER_DATA_ATTRIBUTE = Character.toLowerCase(HeaderData.class.getSimpleName().charAt(0)) + HeaderData.class.getSimpleName().substring(1);
-	
+	public static final String HEADER_DATA_ATTRIBUTE = AttributeUtils.createNameForClass(HeaderData.class);
+
 	@Autowired
 	private UserService userService;
 
@@ -30,10 +27,21 @@ public class HeaderViewPreparer implements ViewPreparer {
 		HeaderData headerData = new HeaderData();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication != null && authentication.isAuthenticated() && authentication.getName() != "anonymousUser") {
-			headerData.setCurrentUserId(userService.getUserByLogin(authentication.getName()).getId().toString());
-			
+			UserProfile user = userService.getUserByLogin(authentication.getName());
+			System.out.println(user.getLogin());
+			headerData.setCurrentUserId(user.getId().toString());
+			headerData.setCurrentUserName(userName(user));
 		}
 		attributeContext.putAttribute(HEADER_DATA_ATTRIBUTE, new Attribute(headerData));
+	}
+
+	private String userName(UserProfile user) {
+		if (StringUtils.isEmpty(user.getFirstName()) && StringUtils.isEmpty(user.getMiddleName())
+				&& StringUtils.isEmpty(user.getLastName())) {
+			return user.getLogin();
+		} else {
+			return user.getFirstName() + " " + user.getMiddleName() + " " + user.getLastName();
+		}
 	}
 
 }

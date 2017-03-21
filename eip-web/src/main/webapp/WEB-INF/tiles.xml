@@ -6,52 +6,55 @@
 
 	<!-- Root layout -->
 
- 	<definition name="component/header" template="/WEB-INF/view/portal/header.jsp" preparer="headerViewPreparer"/>
-	<definition name="component/footer" template="/WEB-INF/view/portal/footer.jsp" />
+	<definition name="root_header" template="/WEB-INF/view/portal/header.jsp"
+		preparer="headerViewPreparer" />
+	<definition name="root_footer" template="/WEB-INF/view/portal/footer.jsp" />
 
-    <definition name="layout" template="/WEB-INF/view/portal/layout.jsp" >
-		<put-attribute name="header" value="component/header" />
-		<put-attribute name="footer" value="component/footer" />
+	<definition name="root_layout" template="/WEB-INF/view/portal/layout.jsp">
+		<put-attribute name="header" value="root_header" />
+		<put-attribute name="footer" value="root_footer" />
 	</definition>
-	
+
 	<!-- Login -->
-	
-	<definition name="content/login" template="/WEB-INF/view/portal/login.jsp"/>
-	
-	<definition name="login" extends="layout">
+
+	<definition name="login" extends="root_layout">
 		<put-attribute name="title" value="Вход" />
-		<put-attribute name="content" value="content/login" />
-	</definition>
-	
-	<!-- News -->
-	
-	<definition name="content/news/list" template="/WEB-INF/view/portal/news/news-list.jsp"/>
-	
-	<definition name="news/list" extends="layout">
-		<put-attribute name="title" value="Новости" />
-		<put-attribute name="content" value="content/news/list" />
-	</definition>
-	
-	<!-- User layout -->
-	
-	<definition name="component/user/header" template="/WEB-INF/view/portal/user/header.jsp"/>
-	
-	<definition name="user/layout" template="/WEB-INF/view/portal/user/layout.jsp">
-		<put-attribute name="userHeader" value="user/header" />
-	</definition>
-	
-	<definition name="content/user/profile" template="/WEB-INF/view/portal/user/profile.jsp"/>
-	<definition name="content/user/profile-edit" template="/WEB-INF/view/portal/user/profile-edit.jsp"/>
-	
-	<definition name="/user/profile" extends="user/layout">
-		<put-attribute name="title" value="Профиль" />
-		<put-attribute name="userContent" value="component/user/profile" />
-	</definition>
-	
-	<definition name="/user/profile-edit" extends="user/layout">
-		<put-attribute name="title" value="Профиль (редактирование)" />
-		<put-attribute name="userContent" value="component/user/profile-edit" />
+		<put-attribute name="content" value="/WEB-INF/view/portal/login.jsp" />
 	</definition>
 
+	<!-- News -->
+
+	<definition name="news.list" extends="root_layout">
+		<put-attribute name="title" value="Новости" />
+		<put-attribute name="content"
+			value="/WEB-INF/view/portal/news/news-list.jsp" />
+	</definition>
+
+	<!-- User layout -->
+
+	<definition name="user_layout" template="/WEB-INF/view/portal/user/layout.jsp">
+		<put-attribute name="userHeader"
+			value="/WEB-INF/view/portal/user/header.jsp" />
+	</definition>
+
+	<definition name="user.profile" extends="root_layout">
+		<put-attribute name="title" value="Профиль" />
+		<put-attribute name="content">
+			<definition extends="user_layout">
+				<put-attribute name="userContent"
+					value="/WEB-INF/view/portal/user/user-profile.jsp" />
+			</definition>
+		</put-attribute>
+	</definition>
+
+	<definition name="user.profile-edit" extends="root_layout">
+		<put-attribute name="title" value="Профиль (редактирование)" />
+		<put-attribute name="content">
+			<definition extends="user_layout">
+				<put-attribute name="userContent"
+					value="/WEB-INF/view/portal/user/user-profile-edit.jsp" />
+			</definition>
+		</put-attribute>
+	</definition>
 
 </tiles-definitions>
