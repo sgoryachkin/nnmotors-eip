@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ru.nnmotors.eip.business.api.model.UserRole;
-import ru.nnmotors.eip.business.api.model.entity.User;
-import ru.nnmotors.eip.business.api.model.entity.User_;
+import ru.nnmotors.eip.business.api.model.entity.UserProfile;
+import ru.nnmotors.eip.business.api.model.entity.UserProfile_;
 import ru.nnmotors.eip.business.api.model.exception.SecurityCheckException;
 import ru.nnmotors.eip.business.api.model.exception.UserAccessCheckException;
 import ru.nnmotors.eip.business.api.service.SecurityService;
@@ -54,9 +54,9 @@ public class SecurityServiceImpl implements SecurityService {
 	private String getUserByLogin(Long userId) {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<String> criteria = criteriaBuilder.createQuery(String.class);
-		Root<User> root = criteria.from(User.class);
-		Predicate idPredicate = criteriaBuilder.equal(root.get(User_.id), userId);
-		return em.createQuery(criteria.select(root.get(User_.login)).where(idPredicate)).getSingleResult();
+		Root<UserProfile> root = criteria.from(UserProfile.class);
+		Predicate idPredicate = criteriaBuilder.equal(root.get(UserProfile_.id), userId);
+		return em.createQuery(criteria.select(root.get(UserProfile_.login)).where(idPredicate)).getSingleResult();
 	}
 
 	@Override

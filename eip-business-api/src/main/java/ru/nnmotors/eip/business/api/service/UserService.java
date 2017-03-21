@@ -1,17 +1,17 @@
 package ru.nnmotors.eip.business.api.service;
 
-import ru.nnmotors.eip.business.api.model.entity.User;
+import ru.nnmotors.eip.business.api.model.entity.UserProfile;
 
 public interface UserService {
 	
-	Long createUser(User user);
+	Long createUser(UserProfile user);
 	
-	void updateUser(User user);
+	void updateUser(UserProfile user);
 
 	void removeUser(Long id);
 	
-	User getUser(Long id);
+	UserProfile getUser(Long id);
 	
-	User getUserByLogin(String login);
+	UserProfile getUserByLogin(String login);
 
 }

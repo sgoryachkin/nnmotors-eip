@@ -23,6 +23,15 @@
 		<put-attribute name="content" value="content/login" />
 	</definition>
 	
+	<!-- News -->
+	
+	<definition name="content/news/list" template="/WEB-INF/view/portal/news/news-list.jsp"/>
+	
+	<definition name="news/list" extends="layout">
+		<put-attribute name="title" value="Новости" />
+		<put-attribute name="content" value="content/news/list" />
+	</definition>
+	
 	<!-- User layout -->
 	
 	<definition name="component/user/header" template="/WEB-INF/view/portal/user/header.jsp"/>

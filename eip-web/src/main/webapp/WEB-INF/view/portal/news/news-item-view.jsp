@@ -5,7 +5,7 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.3">
 
 	<div>
-		<p>News view</p>
+		<p>News Item view</p>
 	</div>
 
 </jsp:root>

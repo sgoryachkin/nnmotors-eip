@@ -7,7 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.transaction.annotation.Transactional;
 
-import ru.nnmotors.eip.business.api.model.entity.User;
+import ru.nnmotors.eip.business.api.model.entity.UserProfile;
 import ru.nnmotors.eip.business.api.service.UserService;
 
 public class DelegateAuthenticationProvider implements AuthenticationProvider {
@@ -22,7 +22,7 @@ public class DelegateAuthenticationProvider implements AuthenticationProvider {
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		Authentication authenticationResult = authenticationProvider.authenticate(authentication);
 		if (userService.getUserByLogin(authenticationResult.getName()) == null) {
-			User user = new User();
+			UserProfile user = new UserProfile();
 			user.setLogin(authenticationResult.getName());
 			userService.createUser(user);
 		}

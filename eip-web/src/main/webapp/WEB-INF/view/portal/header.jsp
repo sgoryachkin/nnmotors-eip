@@ -30,7 +30,7 @@
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<li><a href="${pageContext.request.contextPath}/replace-password/${headerData.currentUserId}" id="replace-password-user">Сменить пароль</a> </li>
-					<li><a><span class="glyphicon glyphicon-user"/>&#160;<sec:authentication property="principal.username"/></a></li>
+					<li><a><span class="glyphicon glyphicon-user"/>&#160;<sec:authentication property="name"/></a></li>
 					<li>
 						<form:form action="${pageContext.request.contextPath}/logout">
 							<button class="btn btn-link navbar-btn" type="submit"><span class="glyphicon glyphicon-log-out"/> Выход</button>

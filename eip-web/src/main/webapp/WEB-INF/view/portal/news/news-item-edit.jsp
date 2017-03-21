@@ -6,7 +6,7 @@
 
 	<div>
 
-		<p>News edit</p>
+		<p>News Item edit</p>
 
 	</div>
 

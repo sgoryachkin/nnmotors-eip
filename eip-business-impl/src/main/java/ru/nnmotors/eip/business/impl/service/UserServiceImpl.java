@@ -16,10 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ru.nnmotors.eip.business.api.model.entity.User;
+import ru.nnmotors.eip.business.api.model.entity.UserProfile;
 import ru.nnmotors.eip.business.api.service.SecurityService;
 import ru.nnmotors.eip.business.api.service.UserService;
-import ru.nnmotors.eip.business.api.model.entity.User_;
+import ru.nnmotors.eip.business.api.model.entity.UserProfile_;
 
 @Service
 @Transactional
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 	private SecurityService securityService;
 
 	@Override
-	public Long createUser(User user) {
+	public Long createUser(UserProfile user) {
 		user.setCreateTime(new Date());
 		em.persist(user);
 		LOGGER.debug("User created: " + user.getId());
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateUser(User user) {
+	public void updateUser(UserProfile user) {
 		securityService.checkUser(user.getId());
 		em.merge(user);
 		LOGGER.debug("User edit: " + user.getId());
@@ -56,8 +56,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUser(Long id) {
-		User user = em.find(User.class, id);
+	public UserProfile getUser(Long id) {
+		UserProfile user = em.find(UserProfile.class, id);
 		if (user == null) {
 			throw new IllegalStateException("User not found: " + id);
 		}
@@ -65,13 +65,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUserByLogin(String login) {
+	public UserProfile getUserByLogin(String login) {
 		LOGGER.debug("getUserByLogin: " + login);
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-		CriteriaQuery<User> criteria = criteriaBuilder.createQuery(User.class);
+		CriteriaQuery<UserProfile> criteria = criteriaBuilder.createQuery(UserProfile.class);
 
-		Root<User> root = criteria.from(User.class);
-		Predicate loginPredicate = criteriaBuilder.equal(root.get(User_.login), login);
+		Root<UserProfile> root = criteria.from(UserProfile.class);
+		Predicate loginPredicate = criteriaBuilder.equal(root.get(UserProfile_.login), login);
 
 		try {
 			return em.createQuery(criteria.where(loginPredicate)).getSingleResult();

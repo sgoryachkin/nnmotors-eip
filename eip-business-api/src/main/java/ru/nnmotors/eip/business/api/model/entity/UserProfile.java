@@ -1,20 +1,28 @@
 package ru.nnmotors.eip.business.api.model.entity;
 
 
-import javax.persistence.*;
+
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 @Entity
-@Table(name = "user_profile")
-public class User {
+public class UserProfile {
 	
-    public User() {
+    public UserProfile() {
 		super();
 	}
 
-	public User(Long id) {
+	public UserProfile(Long id) {
 		super();
 		this.id = id;
+	}
+	
+	public static UserProfile getReference(Long id) {
+		return new UserProfile(id);
 	}
 
 	@Id

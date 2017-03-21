@@ -19,7 +19,7 @@
 	
 	<context:component-scan base-package="ru.nnmotors.eip.web.common"/>
 	
-	<bean id="activeDirectoryAuthenticationProvider" class="ru.nnmotors.eip.dev.auth.AuthProvider"/>
+	<bean id="activeDirectoryAuthenticationProvider" class="ru.nnmotors.eip.dev.auth.DevAuthProvider"/>
 	
 	<bean id="delegateAuthenticationProvider" class="ru.nnmotors.eip.web.common.auth.DelegateAuthenticationProvider">
 		<property name="authenticationProvider" ref="activeDirectoryAuthenticationProvider"/>
@@ -34,7 +34,7 @@
 								access="hasRole(T(ru.nnmotors.eip.business.api.model.UserRole).ROLE_USER.name())"/>
         <security:intercept-url pattern="/login" access="permitAll"/>
 
-        <security:form-login login-page="/login" default-target-url="/main" authentication-failure-url="/login?error=true"/>
+        <security:form-login login-page="/login" default-target-url="/news/list" authentication-failure-url="/login?error=true"/>
         <security:logout logout-url="/logout" logout-success-url="/login"/>
     </security:http>
 
