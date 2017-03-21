@@ -1,4 +1,4 @@
-package ru.nnmotors.eip.web.ui.pages.portal.model;
+package ru.nnmotors.eip.web.ui.pages.portal;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package ru.nnmotors.eip.web.ui.pages.portal.controller;
+package ru.nnmotors.eip.web.ui.pages.portal;
 
 
 import org.apache.tiles.Attribute;
@@ -11,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import ru.nnmotors.eip.business.api.service.UserService;
-import ru.nnmotors.eip.web.ui.pages.portal.model.HeaderData;
 
 @Component
 public class HeaderViewPreparer implements ViewPreparer {

@@ -19,16 +19,14 @@
 	
 	<context:component-scan base-package="ru.nnmotors.eip.web.common"/>
 	
-	<bean id="activeDirectoryAuthenticationProvider" class="ru.nnmotors.eip.dev.auth.AuthProvider">
-
-	</bean>
+	<bean id="activeDirectoryAuthenticationProvider" class="ru.nnmotors.eip.dev.auth.AuthProvider"/>
 	
-	<bean id="eipAuthenticationProvider" class="ru.nnmotors.eip.web.common.auth.EipAuthenticationProvider">
+	<bean id="delegateAuthenticationProvider" class="ru.nnmotors.eip.web.common.auth.DelegateAuthenticationProvider">
 		<property name="authenticationProvider" ref="activeDirectoryAuthenticationProvider"/>
 	</bean>
 	
 	<security:authentication-manager>
-		<security:authentication-provider ref="eipAuthenticationProvider"/>
+		<security:authentication-provider ref="delegateAuthenticationProvider"/>
 	</security:authentication-manager>
 
 	<security:http use-expressions="true">
