@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import ru.nnmotors.eip.business.api.model.entity.UserProfile;
 import ru.nnmotors.eip.business.api.service.UserService;
@@ -46,6 +47,13 @@ public class ProfileController {
 		return "user.profile-edit";
 	}
 	
+	@RequestMapping(value = "{id}/profile-edit-avatar", method = RequestMethod.POST)
+	public String userProfileSaveAvatar(@PathVariable Long id, MultipartFile attachFile) {
+		LOGGER.debug("show user profile");
+		updateUserAvatar(id, attachFile);
+		return "user.profile-edit";
+	}
+	
 	@RequestMapping(value = "{id}/profile-edit", method = RequestMethod.POST)
 	public String userProfileSave(@Valid ProfileEditForm profileEditForm, @PathVariable Long id, BindingResult result) {
 		LOGGER.debug("show user profile");
@@ -71,6 +79,10 @@ public class ProfileController {
 		user.setLastName(userForm.getLastName());
 		user.setMiddleName(userForm.getMiddleName());
 		userService.updateUser(user);
+	}
+	
+	private void updateUserAvatar(Long id, MultipartFile attachFile) {
+		LOGGER.debug("Uploaded file: " + attachFile.getOriginalFilename());
 	}
 	
 	private ProfileViewData assemblProfileData(UserProfile user) {

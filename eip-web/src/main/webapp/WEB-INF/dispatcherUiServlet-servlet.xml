@@ -1,45 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
-	
-	<context:annotation-config/>
-	
-	<context:component-scan base-package="ru.nnmotors.eip.web.ui"/>
-	
-	<mvc:annotation-driven/>
-	
-	<mvc:resources mapping="/static/webjars/**" location="classpath:/META-INF/resources/webjars/" cache-period="86400"/>
-	<mvc:resources mapping="/static/js/**" location="/static/js/" cache-period="60"/>
+
+	<context:annotation-config />
+
+	<context:component-scan base-package="ru.nnmotors.eip.web.ui" />
+
+	<mvc:annotation-driven />
+
+	<mvc:resources mapping="/static/webjars/**"
+		location="classpath:/META-INF/resources/webjars/" cache-period="86400" />
+	<mvc:resources mapping="/static/js/**" location="/static/js/"
+		cache-period="60" />
 
 	<!-- Map GET /login page to logic-less view controller (without controller 
-	     implementation. To submit login form used Login Spring Security Filter) -->
-	<mvc:view-controller path="/login" view-name="login"/>
-    
-    <bean id="viewResolver"  
-        class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>
-        
-<!--         <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
-   <property name="definitions">
-     <list>
-       <value>/WEB-INF/defs/general.xml</value>
-       <value>/WEB-INF/defs/widgets.xml</value>
-       <value>/WEB-INF/defs/administrator.xml</value>
-       <value>/WEB-INF/defs/customer.xml</value>
-       <value>/WEB-INF/defs/templates.xml</value>
-     </list>
-   </property>
- </bean> -->
- 
-    <mvc:tiles-configurer preparer-factory="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory">
-    	<mvc:definitions location="/WEB-INF/tiles.xml"/>
-    </mvc:tiles-configurer>
+		implementation. To submit login form used Login Spring Security Filter) -->
+	<mvc:view-controller path="/login" view-name="login" />
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />
+
+
+	<mvc:tiles-configurer
+		preparer-factory="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory">
+		<mvc:definitions location="/WEB-INF/tiles.xml" />
+	</mvc:tiles-configurer>
+
+
 
 </beans>

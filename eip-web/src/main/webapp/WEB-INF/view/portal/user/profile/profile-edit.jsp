@@ -5,9 +5,29 @@
 
 	<div>
 
+		<form:form class="form-horizontal" method="post" commandName="advertForm"
+			action="${pageContext.request.contextPath}/user/${profile.id}/profile-edit-avatar"
+			enctype="multipart/form-data">
+
+			<div class="form-group ${status.error ? 'has-error' : ''}">
+				<label class="control-label col-sm-2">Аватар:</label>
+				<div class="col-sm-10">
+					<input id="avatar" type="file" class="form-control"
+						placeholder="Укажите файл JPG, PNG" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<input class="btn btn-default" type="submit" value="Обновить" /> <input
+						class="btn btn-default" type="reset" value="Сбросить" />
+				</div>
+			</div>
+
+		</form:form>
+
 		<form:form class="form-horizontal" method="post"
 			modelAttribute="profileEditForm">
-
 
 			<spring:bind path="lastName">
 				<div class="form-group ${status.error ? 'has-error' : ''}">
@@ -44,9 +64,9 @@
 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<input class="btn btn-default" type="submit" value="Сохранить" /> 
-					<input class="btn btn-default" type="reset" value="Сбросить" />
-					<input class="btn btn-link" value="Отмена" />
+					<input class="btn btn-default" type="submit" value="Сохранить" />
+					<input class="btn btn-default" type="reset" value="Сбросить" /> <input
+						class="btn btn-link" value="Отмена" />
 				</div>
 			</div>
 
