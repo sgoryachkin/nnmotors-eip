@@ -6,25 +6,25 @@
 
 	<!-- Root layout -->
 
-	<definition name="root_header" template="/WEB-INF/view/portal/header.jsp"
+	<definition name="header" template="/WEB-INF/view/portal/header.jsp"
 		preparer="headerViewPreparer" />
-	<definition name="root_footer" template="/WEB-INF/view/portal/footer.jsp" />
+	<definition name="footer" template="/WEB-INF/view/portal/footer.jsp" />
 
-	<definition name="root_layout" template="/WEB-INF/view/portal/layout.jsp">
-		<put-attribute name="header" value="root_header" />
-		<put-attribute name="footer" value="root_footer" />
+	<definition name="layout" template="/WEB-INF/view/portal/layout.jsp">
+		<put-attribute name="header" value="header" />
+		<put-attribute name="footer" value="footer" />
 	</definition>
 
 	<!-- Login -->
 
-	<definition name="login" extends="root_layout">
+	<definition name="login" extends="layout">
 		<put-attribute name="title" value="Вход" />
 		<put-attribute name="content" value="/WEB-INF/view/portal/login.jsp" />
 	</definition>
 
 	<!-- News -->
 
-	<definition name="news.list" extends="root_layout">
+	<definition name="news.list" extends="layout">
 		<put-attribute name="title" value="Новости" />
 		<put-attribute name="content"
 			value="/WEB-INF/view/portal/news/news-list.jsp" />
@@ -32,27 +32,27 @@
 
 	<!-- User layout -->
 
-	<definition name="user_layout" template="/WEB-INF/view/portal/user/layout.jsp">
+	<definition name="user.layout" template="/WEB-INF/view/portal/user/layout.jsp">
 		<put-attribute name="userHeader"
 			value="/WEB-INF/view/portal/user/header.jsp" />
 	</definition>
 
-	<definition name="user.profile" extends="root_layout">
-		<put-attribute name="title" value="Профиль" />
+	<definition name="user.profile-view" extends="layout">
+		<put-attribute name="title" expression="${profile.fullName}" />
 		<put-attribute name="content">
-			<definition extends="user_layout">
+			<definition extends="user.layout">
 				<put-attribute name="userContent"
-					value="/WEB-INF/view/portal/user/user-profile.jsp" />
+					value="/WEB-INF/view/portal/user/profile/profile-view.jsp" />
 			</definition>
 		</put-attribute>
 	</definition>
 
-	<definition name="user.profile-edit" extends="root_layout">
-		<put-attribute name="title" value="Профиль (редактирование)" />
+	<definition name="user.profile-edit" extends="layout">
+		<put-attribute name="title" expression="${profile.fullName}" />
 		<put-attribute name="content">
-			<definition extends="user_layout">
+			<definition extends="user.layout">
 				<put-attribute name="userContent"
-					value="/WEB-INF/view/portal/user/user-profile-edit.jsp" />
+					value="/WEB-INF/view/portal/user/profile/profile-edit.jsp" />
 			</definition>
 		</put-attribute>
 	</definition>

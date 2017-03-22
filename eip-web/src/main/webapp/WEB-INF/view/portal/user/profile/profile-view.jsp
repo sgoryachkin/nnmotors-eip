@@ -7,6 +7,7 @@
 	<div>
 
 		<p>Profile view</p>
+		<c:out value="${profile.fullName}"></c:out>
 		<c:out value="${profile.login}"></c:out>
 
 	</div>

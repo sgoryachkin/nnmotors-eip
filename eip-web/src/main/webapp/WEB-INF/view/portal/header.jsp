@@ -8,7 +8,7 @@
 
 	<tiles:importAttribute name="headerData" />
 
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-inverse">
 		<div class="container">
 			<div class="nav navbar-header">
 				<div class="navbar-brand">

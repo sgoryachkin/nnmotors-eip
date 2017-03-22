@@ -85,6 +85,11 @@
 			<artifactId>tiles-jsp</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-extras</artifactId>
+		</dependency>
+
 		<!-- Other -->
 
 		<dependency>

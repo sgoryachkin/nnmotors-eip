@@ -12,14 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import ru.nnmotors.eip.business.api.model.entity.UserProfile;
 import ru.nnmotors.eip.business.api.service.UserService;
-import ru.nnmotors.eip.web.common.util.AttributeUtils;
 
 @Controller
 @Transactional
 @RequestMapping("user")
 public class ProfileController {
 	
-	public static final String PROFILE_DATA_ATTRIBUTE = AttributeUtils.createNameForClass(ProfileData.class);
+	public static final String PROFILE_DATA_ATTRIBUTE = "profile";
 	
 	@Autowired
 	private UserService userService;
@@ -31,7 +30,7 @@ public class ProfileController {
 		LOGGER.debug("show user profile");
 		UserProfile user = userService.getUser(id);
 		model.addAttribute(PROFILE_DATA_ATTRIBUTE, assemblProfileData(user));
-		return "user.profile";
+		return "user.profile-view";
 	}
 	
 	private ProfileData assemblProfileData(UserProfile user) {
