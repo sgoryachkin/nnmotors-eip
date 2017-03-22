@@ -3,7 +3,7 @@
 <Configure class="org.eclipse.jetty.webapp.WebAppContext">
 
 	<!-- Data source for debug with embedded Jetty server -->
-	<New id="serviceMessagesDataSource" class="org.eclipse.jetty.plus.jndi.Resource">
+	<New id="eipDataSource" class="org.eclipse.jetty.plus.jndi.Resource">
 		<Arg>jdbc/eipDataSource</Arg>
 		<Arg>
 			<New class="org.apache.commons.dbcp.BasicDataSource">
@@ -15,28 +15,11 @@
 		</Arg>
 	</New>
 	
-	<New id="nnmotors.eip.imageStorageUrl" class="org.eclipse.jetty.plus.jndi.EnvEntry">
-		<Arg>gargle</Arg>
-		<Arg type="java.lang.String">eip-web/target/tmp/image</Arg>
+	<New id="imageStorageUrl" class="org.eclipse.jetty.plus.jndi.EnvEntry">
+		<Arg>nnmotors/eip/imageStorageUrl</Arg>
+		<Arg type="java.lang.String">file://eip-web/target/tmp/image/news</Arg>
 		<Arg type="boolean">true</Arg>
 	</New>
-	
-	<New id="nnmotors.eip.documentStorageUrl" class="org.eclipse.jetty.plus.jndi.EnvEntry">
-		<Arg>gargle</Arg>
-		<Arg type="java.lang.String">eip-web/target/tmp/document</Arg>
-		<Arg type="boolean">true</Arg>
-	</New>
-	
-	<New id="nnmotors.eip.authProvider" class="org.eclipse.jetty.plus.jndi.EnvEntry">
-		<Arg>gargle</Arg>
-		<Arg type="java.lang.String">100</Arg>
-		<Arg type="boolean">true</Arg>
-	</New>
-	
-	<New id="nnmotors.eip.activeDirectoryUrl" class="org.eclipse.jetty.plus.jndi.EnvEntry">
-		<Arg>gargle</Arg>
-		<Arg type="java.lang.String">100</Arg>
-		<Arg type="boolean">true</Arg>
-	</New>
+
 	
 </Configure>

@@ -6,9 +6,24 @@
 
 	<div>
 
-		<p>Profile view</p>
-		<c:out value="${profile.fullName}"></c:out>
-		<c:out value="${profile.login}"></c:out>
+		<div class="form-horizontal">
+
+			<div class="form-group ${status.error ? 'has-error' : ''}">
+				<div class="control-label col-sm-2" path="lastName">ФИО:</div>
+				<div class="col-sm-10">
+					<div class="form-control">
+						<c:out value="${profile.fullName}" />
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<a href="${pageContext.request.contextPath}/user/${profile.id}/profile-edit"
+						class="btn btn-default" role="button" aria-pressed="true">Редактировать</a>
+				</div>
+			</div>
+		</div>
 
 	</div>
 

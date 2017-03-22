@@ -42,6 +42,8 @@
 
 	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/eipDataSource" />
 	
+	<jee:jndi-lookup id="imageStorage" jndi-name="nnmotors/eip/imageStorageUrl" expected-type="java.lang.String"/>
+	
 	<!-- Security -->
 	
 

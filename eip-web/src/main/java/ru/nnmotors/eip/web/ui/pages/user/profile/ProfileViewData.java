@@ -1,6 +1,8 @@
 package ru.nnmotors.eip.web.ui.pages.user.profile;
 
-public class ProfileData {
+public class ProfileViewData {
+	
+	private Long id;
 	
 	private String login;
 	
@@ -31,6 +33,14 @@ public class ProfileData {
 
 	public void setAvatarUrl(String avatarUrl) {
 		this.avatarUrl = avatarUrl;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

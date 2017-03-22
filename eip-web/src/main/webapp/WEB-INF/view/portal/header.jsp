@@ -24,8 +24,6 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="!isAuthenticated()">
-					<li><a href="${pageContext.request.contextPath}/registration"><span
-							class="glyphicon glyphicon-user"></span> Регистрация</a></li>
 					<li><a href="${pageContext.request.contextPath}/login"><span
 							class="glyphicon glyphicon-log-in"></span> Вход</a></li>
 				</sec:authorize>

@@ -6,7 +6,7 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:tiles="http://tiles.apache.org/tags-tiles" version="2.3">
 
-	<ul class="nav nav-tabs">
+	<ul class="navbar nav nav-tabs">
 		<li class="active"><a href="#">Профиль</a></li>
 		<li><a href="#">Командировки</a></li>
 		<li><a href="#">Отпуска</a></li>

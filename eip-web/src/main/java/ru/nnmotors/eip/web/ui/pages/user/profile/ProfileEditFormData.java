@@ -1,5 +1,5 @@
 package ru.nnmotors.eip.web.ui.pages.user.profile;
 
-public class ProfileEditData {
+public class ProfileEditFormData {
 
 }
