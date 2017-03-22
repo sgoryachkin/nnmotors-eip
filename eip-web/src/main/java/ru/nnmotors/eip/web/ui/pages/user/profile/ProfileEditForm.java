@@ -1,6 +1,10 @@
 package ru.nnmotors.eip.web.ui.pages.user.profile;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ProfileEditForm {
+	
+	private MultipartFile avatar;
 	
     private String firstName;
 
@@ -30,6 +34,14 @@ public class ProfileEditForm {
 
 	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
+	}
+
+	public MultipartFile getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(MultipartFile avatar) {
+		this.avatar = avatar;
 	}
 
 }

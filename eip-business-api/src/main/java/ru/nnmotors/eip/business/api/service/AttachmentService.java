@@ -4,11 +4,13 @@ import java.io.InputStream;
 
 import ru.nnmotors.eip.business.api.model.entity.Attachment;
 
-public interface AttachmentStorageService {
+public interface AttachmentService {
 	
 
 	Long uploadProfileImageAttachment(InputStream is, String fileName);
 	
 	Attachment getAttachment(Long id);
+	
+	InputStream getAttachmentInputStream(Long id);
 
 }

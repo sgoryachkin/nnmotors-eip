@@ -1,5 +1,7 @@
 package ru.nnmotors.eip.web.ui.pages.user.profile;
 
+import java.io.IOException;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,20 +18,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import ru.nnmotors.eip.business.api.model.entity.UserProfile;
+import ru.nnmotors.eip.business.api.service.AttachmentService;
 import ru.nnmotors.eip.business.api.service.UserService;
+import ru.nnmotors.eip.web.common.attachment.FileBucket;
 
 @Controller
 @Transactional
 @RequestMapping("user")
 public class ProfileController {
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ProfileController.class);
+	
 	public static final String PROFILE_DATA_ATTRIBUTE = "profile";
 	public static final String PROFILE_FORM_ATTRIBUTE = "profileEditForm";
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private AttachmentService attachmentStorageService;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ProfileController.class);
+	
 
 	@RequestMapping(value = "{id}/profile", method = RequestMethod.GET)
 	public String userProfileView(@PathVariable Long id, Model model) {
@@ -44,15 +54,10 @@ public class ProfileController {
 		UserProfile user = userService.getUser(id);
 		model.addAttribute(PROFILE_DATA_ATTRIBUTE, assemblProfileData(user));
 		model.addAttribute(PROFILE_FORM_ATTRIBUTE, assemblProfileEditForm(user));
+		model.addAttribute("fileBucket", new FileBucket());
 		return "user.profile-edit";
 	}
-	
-	@RequestMapping(value = "{id}/profile-edit-avatar", method = RequestMethod.POST)
-	public String userProfileSaveAvatar(@PathVariable Long id, MultipartFile attachFile) {
-		LOGGER.debug("show user profile");
-		updateUserAvatar(id, attachFile);
-		return "user.profile-edit";
-	}
+
 	
 	@RequestMapping(value = "{id}/profile-edit", method = RequestMethod.POST)
 	public String userProfileSave(@Valid ProfileEditForm profileEditForm, @PathVariable Long id, BindingResult result) {
@@ -74,6 +79,9 @@ public class ProfileController {
 	}
 	
 	private void updateUser(Long id, ProfileEditForm userForm) {
+		if (!StringUtils.isEmpty(userForm.getAvatar().getOriginalFilename())) {
+			updateUserAvatar(id, userForm.getAvatar());
+		}
 		UserProfile user = userService.getUser(id);
 		user.setFirstName(userForm.getFirstName());
 		user.setLastName(userForm.getLastName());
@@ -81,8 +89,13 @@ public class ProfileController {
 		userService.updateUser(user);
 	}
 	
-	private void updateUserAvatar(Long id, MultipartFile attachFile) {
-		LOGGER.debug("Uploaded file: " + attachFile.getOriginalFilename());
+	private void updateUserAvatar(Long id, MultipartFile multipartFile) {
+		LOGGER.debug("Uploaded file: " + multipartFile.getOriginalFilename());
+		try {
+			attachmentStorageService.uploadProfileImageAttachment(multipartFile.getInputStream(), multipartFile.getOriginalFilename());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	private ProfileViewData assemblProfileData(UserProfile user) {

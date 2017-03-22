@@ -13,6 +13,8 @@ public class Attachment {
 	
 	private String relativeUrl;
 	
+	private String originalFileName;
+	
 	public Long getId() {
 		return id;
 	}
@@ -35,6 +37,14 @@ public class Attachment {
 
 	public void setStarageId(String starageId) {
 		this.starageId = starageId;
+	}
+
+	public String getOriginalFileName() {
+		return originalFileName;
+	}
+
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
 	}
 
 }
