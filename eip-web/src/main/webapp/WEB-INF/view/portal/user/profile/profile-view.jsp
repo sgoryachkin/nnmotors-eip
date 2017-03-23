@@ -5,9 +5,12 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.3">
 
 	<div>
+		<div>
+			<img alt="Фото" src="${pageContext.request.contextPath}/attachment/download/${profile.avatarUrl}"/>
+		</div>
 
 		<div class="form-horizontal">
-
+		
 			<div class="form-group ${status.error ? 'has-error' : ''}">
 				<div class="control-label col-sm-2" path="lastName">ФИО:</div>
 				<div class="col-sm-10">

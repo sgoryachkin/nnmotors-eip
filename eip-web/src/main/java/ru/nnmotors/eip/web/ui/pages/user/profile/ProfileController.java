@@ -17,10 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import ru.nnmotors.eip.business.api.model.entity.Attachment;
 import ru.nnmotors.eip.business.api.model.entity.UserProfile;
 import ru.nnmotors.eip.business.api.service.AttachmentService;
 import ru.nnmotors.eip.business.api.service.UserService;
-import ru.nnmotors.eip.web.common.attachment.FileBucket;
+
 
 @Controller
 @Transactional
@@ -54,7 +55,6 @@ public class ProfileController {
 		UserProfile user = userService.getUser(id);
 		model.addAttribute(PROFILE_DATA_ATTRIBUTE, assemblProfileData(user));
 		model.addAttribute(PROFILE_FORM_ATTRIBUTE, assemblProfileEditForm(user));
-		model.addAttribute("fileBucket", new FileBucket());
 		return "user.profile-edit";
 	}
 
@@ -79,20 +79,21 @@ public class ProfileController {
 	}
 	
 	private void updateUser(Long id, ProfileEditForm userForm) {
-		if (!StringUtils.isEmpty(userForm.getAvatar().getOriginalFilename())) {
-			updateUserAvatar(id, userForm.getAvatar());
-		}
 		UserProfile user = userService.getUser(id);
+		if (!StringUtils.isEmpty(userForm.getAvatar().getOriginalFilename())) {
+			 user.setAvatar(Attachment.getReference(createUserAvatar(id, userForm.getAvatar())));
+		}
 		user.setFirstName(userForm.getFirstName());
 		user.setLastName(userForm.getLastName());
 		user.setMiddleName(userForm.getMiddleName());
 		userService.updateUser(user);
 	}
 	
-	private void updateUserAvatar(Long id, MultipartFile multipartFile) {
+	private Long createUserAvatar(Long id, MultipartFile multipartFile) {
 		LOGGER.debug("Uploaded file: " + multipartFile.getOriginalFilename());
 		try {
-			attachmentStorageService.uploadProfileImageAttachment(multipartFile.getInputStream(), multipartFile.getOriginalFilename());
+			Long attachmentId = attachmentStorageService.uploadProfileImageAttachment(multipartFile.getInputStream(), multipartFile.getOriginalFilename(), multipartFile.getContentType());
+			return attachmentId;
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -103,6 +104,9 @@ public class ProfileController {
 		profileData.setFullName(user.getFirstName() + " " + user.getMiddleName() + " " + user.getLastName());
 		profileData.setLogin(user.getLogin());
 		profileData.setId(user.getId());
+		if (user.getAvatar() != null) {
+			profileData.setAvatarUrl(user.getAvatar().getId() + "/avatar.png");
+		}
 		return profileData;
 	}
 

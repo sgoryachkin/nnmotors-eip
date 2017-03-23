@@ -17,7 +17,6 @@
 
 	<tx:annotation-driven />
 	
-
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
@@ -41,11 +40,8 @@
 	</bean>
 
 	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/eipDataSource" />
+	<jee:jndi-lookup id="attachmentStorageUrl" jndi-name="nnmotors/eip/attachmentStorageUrl" expected-type="java.lang.String"/>
 	
-	<jee:jndi-lookup id="imageStorage" jndi-name="nnmotors/eip/imageStorageUrl" expected-type="java.lang.String"/>
 	
-	<!-- Security -->
 	
-
-
 </beans>

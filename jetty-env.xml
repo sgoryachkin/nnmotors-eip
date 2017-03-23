@@ -15,9 +15,9 @@
 		</Arg>
 	</New>
 	
-	<New id="imageStorageUrl" class="org.eclipse.jetty.plus.jndi.EnvEntry">
-		<Arg>nnmotors/eip/imageStorageUrl</Arg>
-		<Arg type="java.lang.String">file:///home/sego/design/nnmotors/nnmotors-ws/nnmotors-eip/eip-web/target/tmp/</Arg>
+	<New id="attachmentStorageUrl" class="org.eclipse.jetty.plus.jndi.EnvEntry">
+		<Arg>nnmotors/eip/attachmentStorageUrl</Arg>
+		<Arg type="java.lang.String">C:/home/sego/design/nnmotors/nnmotors-ws/nnmotors-eip/eip-web/target/tmp/</Arg>
 		<Arg type="boolean">true</Arg>
 	</New>
 

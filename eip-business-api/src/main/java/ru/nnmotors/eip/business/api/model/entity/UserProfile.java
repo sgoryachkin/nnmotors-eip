@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class UserProfile {
@@ -31,8 +33,12 @@ public class UserProfile {
 	
     @Column(unique = true, nullable = false)
     private String login;
-
-    @Column
+    
+    @ManyToOne(targetEntity = Attachment.class)
+    @JoinColumn
+    private Attachment avatar;
+    
+	@Column
     private Date createTime;
 
     @Column
@@ -128,5 +134,14 @@ public class UserProfile {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	
+    public Attachment getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(Attachment avatar) {
+		this.avatar = avatar;
+	}
+
 
 }

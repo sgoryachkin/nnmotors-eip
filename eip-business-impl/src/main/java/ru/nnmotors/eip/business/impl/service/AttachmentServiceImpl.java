@@ -1,12 +1,12 @@
 package ru.nnmotors.eip.business.impl.service;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
@@ -27,58 +27,59 @@ import ru.nnmotors.eip.business.api.service.AttachmentService;
 @Transactional
 public class AttachmentServiceImpl implements AttachmentService {
 
+	public static final String PROFILE_IMAGE_CATEGORY = "profileImage";
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(AttachmentServiceImpl.class);
 
 	@Autowired
-	@Qualifier("imageStorage")
-	private String imageStorageUrl;
+	@Qualifier("attachmentStorageUrl")
+	private String attachmentStorageUrl;
 
 	@PersistenceContext
 	private EntityManager em;
 
 	@Override
-	public Long uploadProfileImageAttachment(InputStream is, String fileName) {
+	public Long uploadProfileImageAttachment(InputStream is, String originalFileName, String contentType) {
 		String storageFileName = UUID.randomUUID().toString();
 
+		File file = null;
 		try {
-			// Open the connection and prepare to POST
-			URL url = new URL(imageStorageUrl + storageFileName);
-			OutputStream os = null;
-			if ("file".equals(url.getProtocol())) {
-				File file = new File(url.getFile());
-				
-				File parent = file.getParentFile();
-				if (!parent.exists() && !parent.mkdirs() && !file.createNewFile()) {
-				    throw new IOException("Couldn't create dir: " + parent);
-				}
-				
-				os = new FileOutputStream(file);
-			} else {
-				URLConnection uc = url.openConnection();
-				uc.setDoOutput(true);
-				uc.setAllowUserInteraction(false);
-				os = uc.getOutputStream();
+			file = new File(
+					attachmentStorageUrl + File.separator + PROFILE_IMAGE_CATEGORY + File.separator + storageFileName);
+			File parent = file.getParentFile();
+			if (!parent.exists() && !parent.mkdirs() && !file.createNewFile()) {
+				throw new IOException("Couldn't create file: " + file);
 			}
-
-			StreamUtils.copy(is, os);
-			os.close();
-			is.close();
-			LOGGER.debug(url.toString());
 		} catch (IOException e) {
-			throw new IllegalStateException(e);
+			throw new IllegalStateException(e.getLocalizedMessage(), e);
 		}
-		
-		Attachment attachment = new Attachment();
-		attachment.setRelativeUrl(storageFileName);
-		attachment.setStarageId("imageStorage");
-		attachment.setOriginalFileName(fileName);
-		em.persist(attachment);
 
-		return attachment.getId();
+		try (OutputStream os = new FileOutputStream(file)) {
+			StreamUtils.copy(is, os);
+		} catch (IOException e) {
+			throw new IllegalStateException(e.getLocalizedMessage(), e);
+		}
+
+		try {
+			Attachment attachment = new Attachment();
+			attachment.setStorageCategoryName(PROFILE_IMAGE_CATEGORY);
+			attachment.setStorageFileName(storageFileName);
+			attachment.setOriginalFileName(originalFileName);
+			attachment.setContentType(contentType);
+			em.persist(attachment);
+			return attachment.getId();
+		} catch (Exception e) {
+			if (!file.delete()) {
+				throw e;
+			}
+			throw e;
+		}
+
 	}
 
 	@Override
 	public Attachment getAttachment(Long id) {
+		LOGGER.debug("Get attachment" + id);
 		Attachment attachment = em.find(Attachment.class, id);
 		if (attachment == null) {
 			throw new IllegalStateException("Attachment not found: " + id);
@@ -88,8 +89,14 @@ public class AttachmentServiceImpl implements AttachmentService {
 
 	@Override
 	public InputStream getAttachmentInputStream(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Attachment attachment = getAttachment(id);
+		File file = new File(attachmentStorageUrl + File.separator + attachment.getStorageCategoryName()
+				+ File.separator + attachment.getStorageFileName());
+		try {
+			return new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			throw new IllegalStateException(e.getLocalizedMessage(), e);
+		}
 	}
 
 }
