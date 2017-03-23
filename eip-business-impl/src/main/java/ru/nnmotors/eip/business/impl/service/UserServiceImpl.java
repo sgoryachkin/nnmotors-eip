@@ -1,6 +1,7 @@
 package ru.nnmotors.eip.business.impl.service;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -20,6 +21,7 @@ import ru.nnmotors.eip.business.api.model.entity.UserProfile;
 import ru.nnmotors.eip.business.api.service.SecurityService;
 import ru.nnmotors.eip.business.api.service.UserService;
 import ru.nnmotors.eip.business.api.model.entity.UserProfile_;
+import ru.nnmotors.eip.business.api.model.param.ListParam;
 
 @Service
 @Transactional
@@ -78,6 +80,21 @@ public class UserServiceImpl implements UserService {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	@Override
+	public List<UserProfile> getUserList(ListParam<?> param) {
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<UserProfile> criteria = criteriaBuilder.createQuery(UserProfile.class);
+
+		Root<UserProfile> root = criteria.from(UserProfile.class);
+
+		criteria.select(root);
+		//criteria.where(criteriaBuilder.equal(root.get(User_.active), true));
+		int firstResult = param.getPageSize() * param.getPage() - param.getPageSize();
+		int maxResults = param.getPageSize() * param.getPage() - param.getPageSize();
+		
+		return em.createQuery(criteria).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
 	}
 
 }

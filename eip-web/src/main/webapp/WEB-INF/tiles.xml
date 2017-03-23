@@ -31,11 +31,18 @@
 	</definition>
 
 	<!-- User layout -->
+	
+	<definition name="user.list" extends="layout">
+		<put-attribute name="title" value="Список сотрудников" />
+		<put-attribute name="content"
+			value="/WEB-INF/view/portal/user/user-list.jsp" />
+	</definition>
 
 	<definition name="user.layout" template="/WEB-INF/view/portal/user/layout.jsp">
 		<put-attribute name="userHeader"
 			value="/WEB-INF/view/portal/user/header.jsp" />
 	</definition>
+	
 
 	<definition name="user.profile-view" extends="layout">
 		<put-attribute name="title" expression="${profile.fullName}" />
