@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import ru.nnmotors.eip.business.api.model.entity.UserProfile;
 import ru.nnmotors.eip.business.api.model.entity.UserProfile_;
@@ -34,7 +35,7 @@ public class UserServiceImpl extends AbstractRepository<UserProfile, String, Str
 
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Autowired
 	private SecurityService securityService;
 
@@ -43,11 +44,26 @@ public class UserServiceImpl extends AbstractRepository<UserProfile, String, Str
 		user.setCreateTime(new Date());
 		return super.create(user);
 	}
-	
+
 	@Override
 	public void update(UserProfile entity) {
 		securityService.checkUser(entity.getId());
 		super.update(entity);
+	}
+
+	@Override
+	protected <R> void createListWhereRestrictions(CriteriaQuery<R> criteriaQuery, Root<? extends UserProfile> root,
+			String filter) {
+		super.createListWhereRestrictions(criteriaQuery, root, filter);
+		if (StringUtils.isEmpty(filter)) {
+			return;
+		}
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		Predicate loginPredicate = criteriaBuilder.like(root.get(UserProfile_.login), "%" + filter + "%");
+		Predicate firstNamePredicate = criteriaBuilder.like(root.get(UserProfile_.firstName), "%" + filter + "%");
+		Predicate lastNamePredicate = criteriaBuilder.like(root.get(UserProfile_.lastName), "%" + filter + "%");
+		Predicate middleNamePredicate = criteriaBuilder.like(root.get(UserProfile_.middleName), "%" + filter + "%");
+		criteriaQuery.where(loginPredicate, firstNamePredicate, lastNamePredicate, middleNamePredicate);
 	}
 
 	@Override

@@ -14,5 +14,7 @@ public interface Repository<T extends HasId, F, O> {
 	void update(T entity);
 	
 	List<T> getList(ListParam<F, O> param);
+	
+	int getListCount(F filter);
 
 }

@@ -16,7 +16,7 @@
 
 	<mvc:resources mapping="/static/webjars/**"
 		location="classpath:/META-INF/resources/webjars/" cache-period="86400" />
-	<mvc:resources mapping="/static/js/**" location="/static/js/"
+	<mvc:resources mapping="/static/**" location="/static/"
 		cache-period="60" />
 
 	<!-- Map GET /login page to logic-less view controller (without controller 

@@ -32,7 +32,7 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Override
 	public void checkUser(Long userId) {
-		String login = getUserByLogin(userId);
+		String login = getLoginByUser(userId);
 		checkUser(login, userId);
 	}
 
@@ -51,7 +51,7 @@ public class SecurityServiceImpl implements SecurityService {
 		}
 	}
 
-	private String getUserByLogin(Long userId) {
+	private String getLoginByUser(Long userId) {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<String> criteria = criteriaBuilder.createQuery(String.class);
 		Root<UserProfile> root = criteria.from(UserProfile.class);

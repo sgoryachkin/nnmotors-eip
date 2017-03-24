@@ -13,7 +13,7 @@ import ru.nnmotors.eip.business.api.model.entity.HasId;
 import ru.nnmotors.eip.business.api.model.param.ListParam;
 import ru.nnmotors.eip.business.api.service.Repository;
 
-public class AbstractRepository<T extends HasId, F, O> implements Repository<T, F, O> {
+public abstract class AbstractRepository<T extends HasId, F, O> implements Repository<T, F, O> {
 	
 	@PersistenceContext
 	private EntityManager em;
@@ -48,14 +48,33 @@ public class AbstractRepository<T extends HasId, F, O> implements Repository<T, 
 	public List<T> getList(ListParam<F, O> param) {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(entityClass);
-
 		Root<T> root = criteria.from(entityClass);
-
-		criteria.select(root);
+		createListWhereRestrictions(criteria, root, param.getFilter());
 		int firstResult = param.getPageSize() * param.getPage() - param.getPageSize();
 		int maxResults = param.getPageSize();
+		criteria.select(root);
 		
 		return em.createQuery(criteria).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+	}
+	
+	@Override
+	public int getListCount(F filter) {
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Long> criteria = criteriaBuilder.createQuery(Long.class);
+		Root<T> root = criteria.from(entityClass);
+		createListWhereRestrictions(criteria, root, filter);
+		criteria.select(criteriaBuilder.countDistinct(root));
+		return em.createQuery(criteria).getSingleResult().intValue();
+	}
+	
+	protected <R> void createListWhereRestrictions(CriteriaQuery<R> criteriaQuery, Root<? extends T> root, F filter) {
+		//criteria.where...
+		return;
+	}
+	
+	protected <R> void createListOrder(CriteriaQuery<R> criteriaQuery, Root<? extends T> root, O filter) {
+		//criteria.orderBy...
+		return;
 	}
 
 }
