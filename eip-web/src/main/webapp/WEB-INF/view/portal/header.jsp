@@ -17,9 +17,8 @@
 			</div>
 			<ul class="nav navbar-nav navbar-left">
 				<li><a href="${pageContext.request.contextPath}/news/list">Новости</a></li>
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<li><a href="${pageContext.request.contextPath}/user/control">Управление
-							пользователями</a></li>
+				<sec:authorize access="isAuthenticated()">
+					<li><a href="${pageContext.request.contextPath}/user/list">Сотрудники</a></li>
 				</sec:authorize>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">

@@ -1,7 +1,6 @@
 package ru.nnmotors.eip.business.impl.service;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -18,14 +17,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ru.nnmotors.eip.business.api.model.entity.UserProfile;
+import ru.nnmotors.eip.business.api.model.entity.UserProfile_;
 import ru.nnmotors.eip.business.api.service.SecurityService;
 import ru.nnmotors.eip.business.api.service.UserService;
-import ru.nnmotors.eip.business.api.model.entity.UserProfile_;
-import ru.nnmotors.eip.business.api.model.param.ListParam;
+import ru.nnmotors.eip.business.impl.common.AbstractRepository;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends AbstractRepository<UserProfile, String, String> implements UserService {
+
+	public UserServiceImpl() {
+		super(UserProfile.class);
+	}
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -36,34 +39,15 @@ public class UserServiceImpl implements UserService {
 	private SecurityService securityService;
 
 	@Override
-	public Long createUser(UserProfile user) {
+	public Long create(UserProfile user) {
 		user.setCreateTime(new Date());
-		em.persist(user);
-		LOGGER.debug("User created: " + user.getId());
-		return user.getId();
+		return super.create(user);
 	}
 	
 	@Override
-	public void removeUser(Long id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void updateUser(UserProfile user) {
-		securityService.checkUser(user.getId());
-		em.merge(user);
-		LOGGER.debug("User edit: " + user.getId());
-
-	}
-
-	@Override
-	public UserProfile getUser(Long id) {
-		UserProfile user = em.find(UserProfile.class, id);
-		if (user == null) {
-			throw new IllegalStateException("User not found: " + id);
-		}
-		return user;
+	public void update(UserProfile entity) {
+		securityService.checkUser(entity.getId());
+		super.update(entity);
 	}
 
 	@Override
@@ -80,21 +64,6 @@ public class UserServiceImpl implements UserService {
 		} catch (NoResultException e) {
 			return null;
 		}
-	}
-
-	@Override
-	public List<UserProfile> getUserList(ListParam<?> param) {
-		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-		CriteriaQuery<UserProfile> criteria = criteriaBuilder.createQuery(UserProfile.class);
-
-		Root<UserProfile> root = criteria.from(UserProfile.class);
-
-		criteria.select(root);
-		//criteria.where(criteriaBuilder.equal(root.get(User_.active), true));
-		int firstResult = param.getPageSize() * param.getPage() - param.getPageSize();
-		int maxResults = param.getPageSize() * param.getPage() - param.getPageSize();
-		
-		return em.createQuery(criteria).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
 	}
 
 }

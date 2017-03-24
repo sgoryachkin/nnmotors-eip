@@ -5,9 +5,25 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.3">
 
 	<div>
+		<div>Filter</div>
 
-		<p>User list</p>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ФИО</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${userListData.users}" var="item">
+					<tr>
+						<td><a
+							href="${pageContext.request.contextPath}/user/${item.id}/profile"><span
+								class="glyphicon glyphicon-user" />&#160;<c:out
+									value="${item.fullName}" /></a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
 
+		</table>
 	</div>
-
 </jsp:root>

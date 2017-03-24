@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Attachment {
+public class Attachment implements HasId {
 	
 	@Id
     @GeneratedValue

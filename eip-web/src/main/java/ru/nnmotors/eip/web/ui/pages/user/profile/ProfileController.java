@@ -21,6 +21,7 @@ import ru.nnmotors.eip.business.api.model.entity.Attachment;
 import ru.nnmotors.eip.business.api.model.entity.UserProfile;
 import ru.nnmotors.eip.business.api.service.AttachmentService;
 import ru.nnmotors.eip.business.api.service.UserService;
+import ru.nnmotors.eip.web.common.util.UserProfileAssambleUtils;
 
 
 @Controller
@@ -44,7 +45,7 @@ public class ProfileController {
 	@RequestMapping(value = "{id}/profile", method = RequestMethod.GET)
 	public String userProfileView(@PathVariable Long id, Model model) {
 		LOGGER.debug("show user profile");
-		UserProfile user = userService.getUser(id);
+		UserProfile user = userService.get(id);
 		model.addAttribute(PROFILE_DATA_ATTRIBUTE, assemblProfileData(user));
 		return "user.profile-view";
 	}
@@ -52,7 +53,7 @@ public class ProfileController {
 	@RequestMapping(value = "{id}/profile-edit", method = RequestMethod.GET)
 	public String userProfileEdit(@PathVariable Long id, Model model) {
 		LOGGER.debug("show user profile");
-		UserProfile user = userService.getUser(id);
+		UserProfile user = userService.get(id);
 		model.addAttribute(PROFILE_DATA_ATTRIBUTE, assemblProfileData(user));
 		model.addAttribute(PROFILE_FORM_ATTRIBUTE, assemblProfileEditForm(user));
 		return "user.profile-edit";
@@ -79,14 +80,14 @@ public class ProfileController {
 	}
 	
 	private void updateUser(Long id, ProfileEditForm userForm) {
-		UserProfile user = userService.getUser(id);
+		UserProfile user = userService.get(id);
 		if (!StringUtils.isEmpty(userForm.getAvatar().getOriginalFilename())) {
 			 user.setAvatar(Attachment.getReference(createUserAvatar(id, userForm.getAvatar())));
 		}
 		user.setFirstName(userForm.getFirstName());
 		user.setLastName(userForm.getLastName());
 		user.setMiddleName(userForm.getMiddleName());
-		userService.updateUser(user);
+		userService.update(user);
 	}
 	
 	private Long createUserAvatar(Long id, MultipartFile multipartFile) {
@@ -101,12 +102,10 @@ public class ProfileController {
 	
 	private ProfileViewData assemblProfileData(UserProfile user) {
 		ProfileViewData profileData = new ProfileViewData();
-		profileData.setFullName(user.getFirstName() + " " + user.getMiddleName() + " " + user.getLastName());
+		profileData.setFullName(UserProfileAssambleUtils.fullName(user));
 		profileData.setLogin(user.getLogin());
 		profileData.setId(user.getId());
-		if (user.getAvatar() != null) {
-			profileData.setAvatarUrl(user.getAvatar().getId() + "/avatar.png");
-		}
+		profileData.setAvatarUrl(UserProfileAssambleUtils.avatarUrl(user, false));
 		return profileData;
 	}
 

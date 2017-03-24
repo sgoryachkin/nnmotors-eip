@@ -24,7 +24,7 @@ public class DelegateAuthenticationProvider implements AuthenticationProvider {
 		if (userService.getUserByLogin(authenticationResult.getName()) == null) {
 			UserProfile user = new UserProfile();
 			user.setLogin(authenticationResult.getName());
-			userService.createUser(user);
+			userService.create(user);
 		}
 		return authenticationResult;
 	}

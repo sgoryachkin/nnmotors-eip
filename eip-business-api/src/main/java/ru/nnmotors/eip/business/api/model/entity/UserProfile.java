@@ -12,20 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class UserProfile {
-	
-    public UserProfile() {
-		super();
-	}
-
-	public UserProfile(Long id) {
-		super();
-		this.id = id;
-	}
-	
-	public static UserProfile getReference(Long id) {
-		return new UserProfile(id);
-	}
+public class UserProfile implements HasId {
 
 	@Id
     @GeneratedValue
@@ -37,6 +24,10 @@ public class UserProfile {
     @ManyToOne(targetEntity = Attachment.class)
     @JoinColumn
     private Attachment avatar;
+    
+    @ManyToOne(targetEntity = Location.class)
+    @JoinColumn
+    private Location location;
     
 	@Column
     private Date createTime;
@@ -54,10 +45,20 @@ public class UserProfile {
     private String email;
 
     @Column
-    private boolean admin = false;
-
-    @Column
     private boolean active = true;
+    
+    public UserProfile() {
+		super();
+	}
+
+	public UserProfile(Long id) {
+		super();
+		this.id = id;
+	}
+	
+	public static UserProfile getReference(Long id) {
+		return new UserProfile(id);
+	}
 
 	public Long getId() {
 		return id;
@@ -117,14 +118,6 @@ public class UserProfile {
 
 	public void setLogin(String login) {
 		this.login = login;
-	}
-
-	public boolean isAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
 	}
 
 	public boolean isActive() {
