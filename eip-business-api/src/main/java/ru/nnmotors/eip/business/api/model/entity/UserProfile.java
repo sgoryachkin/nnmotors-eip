@@ -43,8 +43,14 @@ public class UserProfile implements HasId {
 
     @Column
     private String email;
-
+    
     @Column
+    private String workPhone;
+    
+    @Column
+    private String homePhone;
+
+	@Column
     private boolean active = true;
     
     public UserProfile() {
@@ -135,6 +141,31 @@ public class UserProfile implements HasId {
 	public void setAvatar(Attachment avatar) {
 		this.avatar = avatar;
 	}
+	
+    public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public String getWorkPhone() {
+		return workPhone;
+	}
+
+	public void setWorkPhone(String workPhone) {
+		this.workPhone = workPhone;
+	}
+
+	public String getHomePhone() {
+		return homePhone;
+	}
+
+	public void setHomePhone(String homePhone) {
+		this.homePhone = homePhone;
+	}
+
 
 
 }

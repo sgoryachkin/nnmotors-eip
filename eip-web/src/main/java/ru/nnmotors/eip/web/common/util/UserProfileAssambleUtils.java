@@ -21,7 +21,7 @@ public final class UserProfileAssambleUtils {
 				sb.append(' ');
 			} 
 			if (!StringUtils.isEmpty(user.getMiddleName())) {
-				sb.append(user.getFirstName());
+				sb.append(user.getMiddleName());
 				sb.append(' ');
 			}
 			if (!StringUtils.isEmpty(user.getLastName())) {

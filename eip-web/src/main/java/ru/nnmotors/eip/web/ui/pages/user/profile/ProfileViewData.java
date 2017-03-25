@@ -8,6 +8,10 @@ public class ProfileViewData {
 	
 	private String fullName;
 	
+	private String email;
+	
+	private String workPhone;
+	
 	private String avatarUrl;
 
 	
@@ -41,6 +45,22 @@ public class ProfileViewData {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getWorkPhone() {
+		return workPhone;
+	}
+
+	public void setWorkPhone(String workPhone) {
+		this.workPhone = workPhone;
 	}
 
 }

@@ -106,6 +106,8 @@ public class ProfileController {
 		profileData.setLogin(user.getLogin());
 		profileData.setId(user.getId());
 		profileData.setAvatarUrl(UserProfileAssambleUtils.avatarUrl(user, false));
+		profileData.setEmail(user.getEmail());
+		profileData.setWorkPhone(user.getWorkPhone());
 		return profileData;
 	}
 

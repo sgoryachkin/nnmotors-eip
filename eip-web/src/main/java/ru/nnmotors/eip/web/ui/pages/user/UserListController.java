@@ -1,5 +1,6 @@
 package ru.nnmotors.eip.web.ui.pages.user;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,7 @@ import ru.nnmotors.eip.business.api.model.entity.UserProfile;
 import ru.nnmotors.eip.business.api.model.param.ListParam;
 import ru.nnmotors.eip.business.api.service.UserService;
 import ru.nnmotors.eip.web.common.util.UserProfileAssambleUtils;
+import ru.nnmotors.eip.web.ui.pages.user.UserListData.PagingItem;
 
 @Controller
 @Transactional
@@ -33,8 +35,7 @@ public class UserListController {
 	private UserService userService;
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public String userProfileEdit(
-			@RequestParam(defaultValue = "0") Integer page,
+	public String userProfileEdit(@RequestParam(defaultValue = "1") Integer page,
 			@RequestParam(required = false) String filter, Model model) {
 		LOGGER.debug("show user profile");
 		model.addAttribute(USER_LIST_DATA_ATTRIBUTE, assebleUserListData(page, filter));
@@ -48,8 +49,25 @@ public class UserListController {
 		List<UserListElementData> users = userProfiles.stream()
 				.map(userProfile -> assebleUserListElementData(userProfile)).collect(Collectors.toList());
 		userListData.setUsers(users);
-		return userListData;
 
+		int count = userService.getListCount(filter);
+
+		List<PagingItem> pagingItems = new ArrayList<>(count / PAGE_SIZE + 2);
+		PagingItem prev = new PagingItem(page - 1, "<<", false);
+		prev.setDisable(page <= 2);
+		pagingItems.add(prev);
+		int pageCount = count / PAGE_SIZE + ((count % PAGE_SIZE) > 0 ? 1 : 0);
+		for (int i = 0; i < pageCount; i++) {
+			PagingItem p = new PagingItem(i + 1, String.valueOf(i + 1), (i + 1) == page);
+			pagingItems.add(p);
+
+		}
+		PagingItem next = new PagingItem(page + 1, ">>", false);
+		prev.setDisable(page >= pageCount - 1);
+		pagingItems.add(next);
+		userListData.setPages(pagingItems);
+
+		return userListData;
 	}
 
 	UserListElementData assebleUserListElementData(UserProfile userProfile) {
@@ -58,7 +76,6 @@ public class UserListController {
 		userListElementData.setFullName(UserProfileAssambleUtils.fullName(userProfile));
 		userListElementData.setAvatarUrl(UserProfileAssambleUtils.avatarUrl(userProfile, true));
 		return userListElementData;
-
 	}
 
 }

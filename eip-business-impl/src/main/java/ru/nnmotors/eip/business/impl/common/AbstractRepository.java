@@ -9,10 +9,13 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import ru.nnmotors.eip.business.api.model.entity.HasId;
 import ru.nnmotors.eip.business.api.model.param.ListParam;
 import ru.nnmotors.eip.business.api.service.Repository;
 
+@Transactional
 public abstract class AbstractRepository<T extends HasId, F, O> implements Repository<T, F, O> {
 	
 	@PersistenceContext

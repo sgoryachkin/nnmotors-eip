@@ -17,11 +17,11 @@
 						<c:out value="${profile.fullName}" />
 					</h4>
 					<p>
-						<i class="glyphicon glyphicon-map-marker"></i> TODO://Адрес <br />
-						<i class="glyphicon glyphicon-envelope"></i> TODO:// Электронная
-						почти <br /> <i class="glyphicon glyphicon-globe"></i><a
-							href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a> <br />
-						<i class="glyphicon glyphicon-gift"></i> TODO:// День рождения
+						<i class="glyphicon glyphicon-map-marker"></i> Мицубиши на
+						Гагарина <br /> <i class="glyphicon glyphicon-envelope"></i>&#160;
+						<c:out value="${profile.email}" />
+						<br /> <i class="glyphicon glyphicon-earphone"></i>&#160;<c:out value="${profile.workPhone}" /><br />
+						<i class="glyphicon glyphicon-gift"></i> 02.05.1985
 					</p>
 					<!-- Split button -->
 					<div class="btn-group">
