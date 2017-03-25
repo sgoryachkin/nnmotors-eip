@@ -8,6 +8,7 @@
 
 	<div class="container-fluid">
 		<div class="row">Filter</div>
+
 		<div class="row">
 			<table class="table table-striped">
 				<thead>
