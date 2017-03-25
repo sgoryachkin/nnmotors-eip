@@ -64,6 +64,10 @@
 		<servlet-name>dispatcherUiServlet</servlet-name>
 	</filter-mapping>
 
+	<welcome-file-list>
+		<welcome-file>news/list</welcome-file>
+	</welcome-file-list>
+
 
 	<resource-ref>
 		<description>Service Messages Database</description>
