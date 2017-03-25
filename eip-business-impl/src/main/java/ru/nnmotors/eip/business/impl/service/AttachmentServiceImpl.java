@@ -27,7 +27,7 @@ import ru.nnmotors.eip.business.api.service.AttachmentService;
 @Transactional
 public class AttachmentServiceImpl implements AttachmentService {
 
-	public static final String PROFILE_IMAGE_CATEGORY = "profileImage";
+	public static final String PROFILE_IMAGE_CATEGORY = "webImage";
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AttachmentServiceImpl.class);
 
@@ -39,7 +39,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 	private EntityManager em;
 
 	@Override
-	public Long uploadProfileImageAttachment(InputStream is, String originalFileName, String contentType) {
+	public Long uploadWebImageAttachment(InputStream is, String originalFileName, String contentType) {
 		String storageFileName = UUID.randomUUID().toString();
 
 		File file = null;

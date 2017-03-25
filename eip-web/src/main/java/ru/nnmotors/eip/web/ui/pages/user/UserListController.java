@@ -1,6 +1,5 @@
 package ru.nnmotors.eip.web.ui.pages.user;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +17,7 @@ import ru.nnmotors.eip.business.api.model.entity.UserProfile;
 import ru.nnmotors.eip.business.api.model.param.ListParam;
 import ru.nnmotors.eip.business.api.service.UserService;
 import ru.nnmotors.eip.web.common.util.UserProfileAssambleUtils;
-import ru.nnmotors.eip.web.ui.pages.user.UserListData.PagingItem;
+import ru.nnmotors.eip.web.ui.component.paging.PagindUtils;
 
 @Controller
 @Transactional
@@ -37,35 +36,23 @@ public class UserListController {
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String userProfileEdit(@RequestParam(defaultValue = "1") Integer page,
 			@RequestParam(required = false) String filter, Model model) {
-		LOGGER.debug("show user profile");
+		LOGGER.debug("show user list");
 		model.addAttribute(USER_LIST_DATA_ATTRIBUTE, assebleUserListData(page, filter));
 		return "user.list";
 	}
 
 	UserListData assebleUserListData(int page, String filter) {
 		UserListData userListData = new UserListData();
-		ListParam<String, String> listParam = new ListParam<>(page, PAGE_SIZE, filter);
+		ListParam<String, String> listParam = new ListParam<>(PagindUtils.startIndex(page, PAGE_SIZE), PAGE_SIZE, filter);
 		List<UserProfile> userProfiles = userService.getList(listParam);
 		List<UserListElementData> users = userProfiles.stream()
 				.map(userProfile -> assebleUserListElementData(userProfile)).collect(Collectors.toList());
-		userListData.setUsers(users);
+		userListData.setItems(users);
 
 		int count = userService.getListCount(filter);
 
-		List<PagingItem> pagingItems = new ArrayList<>(count / PAGE_SIZE + 2);
-		PagingItem prev = new PagingItem(page - 1, "<<", false);
-		prev.setDisable(page <= 2);
-		pagingItems.add(prev);
-		int pageCount = count / PAGE_SIZE + ((count % PAGE_SIZE) > 0 ? 1 : 0);
-		for (int i = 0; i < pageCount; i++) {
-			PagingItem p = new PagingItem(i + 1, String.valueOf(i + 1), (i + 1) == page);
-			pagingItems.add(p);
-
-		}
-		PagingItem next = new PagingItem(page + 1, ">>", false);
-		prev.setDisable(page >= pageCount - 1);
-		pagingItems.add(next);
-		userListData.setPages(pagingItems);
+		userListData.setPages(PagindUtils.pagingData(page, PAGE_SIZE, count));
+		userListData.setCount(count);
 
 		return userListData;
 	}

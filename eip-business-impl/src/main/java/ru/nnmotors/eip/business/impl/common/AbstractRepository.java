@@ -53,8 +53,8 @@ public abstract class AbstractRepository<T extends HasId, F, O> implements Repos
 		CriteriaQuery<T> criteria = criteriaBuilder.createQuery(entityClass);
 		Root<T> root = criteria.from(entityClass);
 		createListWhereRestrictions(criteria, root, param.getFilter());
-		int firstResult = param.getPageSize() * param.getPage() - param.getPageSize();
-		int maxResults = param.getPageSize();
+		int firstResult = param.getFirstResult();
+		int maxResults = param.getMaxResults();
 		criteria.select(root);
 		
 		return em.createQuery(criteria).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();

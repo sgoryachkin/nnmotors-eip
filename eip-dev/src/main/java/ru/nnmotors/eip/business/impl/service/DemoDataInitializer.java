@@ -19,8 +19,8 @@ public class DemoDataInitializer {
 
 	Random rnd = new Random(5);
 
-	static final String[] LAST_NAMES = { "Иванов", "Петров", "Сидоров", "Бобров", "Цой" };
-	static final String[] FIRST_NAMES = { "Иван", "Глеб", "Марк", "Александ", "Бандит", "Чубака" };
+	static final String[] LAST_NAMES = { "Иванов", "Петров", "Сидоров", "Бобров", "Цой", "Багданович" };
+	static final String[] FIRST_NAMES = { "Иван", "Глеб", "Марк", "Александ", "Бандит", "Чубака", "Маша", "Михаил" };
 	static final String[] MIDDLE_NAMES = { "Иванович", "", "Михайлович", "Сергеевич", "Аксандрович", "Джекович"};
 	
 	static final String[] DEPARTMENTS_NAMES = { "Сервис", "Салон", "АйТи", "Бухгалтерия" };

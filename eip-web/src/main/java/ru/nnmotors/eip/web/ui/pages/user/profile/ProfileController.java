@@ -93,7 +93,7 @@ public class ProfileController {
 	private Long createUserAvatar(Long id, MultipartFile multipartFile) {
 		LOGGER.debug("Uploaded file: " + multipartFile.getOriginalFilename());
 		try {
-			Long attachmentId = attachmentStorageService.uploadProfileImageAttachment(multipartFile.getInputStream(), multipartFile.getOriginalFilename(), multipartFile.getContentType());
+			Long attachmentId = attachmentStorageService.uploadWebImageAttachment(multipartFile.getInputStream(), multipartFile.getOriginalFilename(), multipartFile.getContentType());
 			return attachmentId;
 		} catch (IOException e) {
 			throw new RuntimeException(e);

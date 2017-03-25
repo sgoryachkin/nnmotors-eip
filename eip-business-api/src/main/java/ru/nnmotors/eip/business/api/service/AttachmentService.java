@@ -7,7 +7,7 @@ import ru.nnmotors.eip.business.api.model.entity.Attachment;
 public interface AttachmentService {
 	
 
-	Long uploadProfileImageAttachment(InputStream is, String fileName, String contentType);
+	Long uploadWebImageAttachment(InputStream is, String fileName, String contentType);
 	
 	Attachment getAttachment(Long id);
 	

@@ -5,29 +5,13 @@ import java.io.Serializable;
 public class ListParam<F, O> implements Serializable {
 	private static final long serialVersionUID = -4885029395197339313L;
 
-	private int page;
+	private int firstResult;
 
-	private int pageSize;
+	private int maxResults;
 
 	private F filter;
 	
 	private O order;
-
-	public int getPage() {
-		return page;
-	}
-
-	public void setPage(int page) {
-		this.page = page;
-	}
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
 
 	public F getFilter() {
 		return filter;
@@ -38,21 +22,22 @@ public class ListParam<F, O> implements Serializable {
 	}
 
 	public ListParam() {
-	}
-
-	public ListParam(int page, int pageSize, F filter) {
 		super();
-		this.page = page;
-		this.pageSize = pageSize;
-		this.filter = filter;
 	}
 	
-	public ListParam(int page, int pageSize, F filter, O order) {
+	public ListParam(int firstResult, int maxResults, F filter, O order) {
 		super();
-		this.page = page;
-		this.pageSize = pageSize;
+		this.firstResult = firstResult;
+		this.maxResults = maxResults;
 		this.filter = filter;
 		this.order = order;
+	}
+	
+	public ListParam(int firstResult, int maxResults, F filter) {
+		super();
+		this.firstResult = firstResult;
+		this.maxResults = maxResults;
+		this.filter = filter;
 	}
 
 	public O getOrder() {
@@ -61,5 +46,21 @@ public class ListParam<F, O> implements Serializable {
 
 	public void setOrder(O order) {
 		this.order = order;
+	}
+
+	public int getFirstResult() {
+		return firstResult;
+	}
+
+	public void setFirstResult(int firstResult) {
+		this.firstResult = firstResult;
+	}
+
+	public int getMaxResults() {
+		return maxResults;
+	}
+
+	public void setMaxResults(int maxResults) {
+		this.maxResults = maxResults;
 	}
 }
