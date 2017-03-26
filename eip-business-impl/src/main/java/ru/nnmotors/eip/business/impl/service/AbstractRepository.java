@@ -1,4 +1,4 @@
-package ru.nnmotors.eip.business.impl.common;
+package ru.nnmotors.eip.business.impl.service;
 
 import java.util.List;
 

@@ -21,7 +21,6 @@ import ru.nnmotors.eip.business.api.model.entity.UserProfile;
 import ru.nnmotors.eip.business.api.model.entity.UserProfile_;
 import ru.nnmotors.eip.business.api.service.SecurityService;
 import ru.nnmotors.eip.business.api.service.UserService;
-import ru.nnmotors.eip.business.impl.common.AbstractRepository;
 
 @Service
 @Transactional
@@ -63,7 +62,7 @@ public class UserServiceImpl extends AbstractRepository<UserProfile, String, Str
 		Predicate firstNamePredicate = criteriaBuilder.like(root.get(UserProfile_.firstName), "%" + filter + "%");
 		Predicate lastNamePredicate = criteriaBuilder.like(root.get(UserProfile_.lastName), "%" + filter + "%");
 		Predicate middleNamePredicate = criteriaBuilder.like(root.get(UserProfile_.middleName), "%" + filter + "%");
-		criteriaQuery.where(loginPredicate, firstNamePredicate, lastNamePredicate, middleNamePredicate);
+		criteriaQuery.where(criteriaBuilder.or(loginPredicate, firstNamePredicate, lastNamePredicate, middleNamePredicate));
 	}
 
 	@Override
