@@ -17,25 +17,15 @@
 	<meta http-equiv="Content-Type" content="application/xhtml+xml" charset="UTF-8"/>
 			
 	<sec:csrfMetaTags />
-
+	
+	
 	<!-- CSS resources -->
 	<link href="${pageContext.request.contextPath}/static/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"
 		rel="stylesheet" />
 	<link href="${pageContext.request.contextPath}/static/webjars/jquery-ui/1.12.1/jquery-ui.min.css" rel="stylesheet" />
 	<link href="${pageContext.request.contextPath}/static/css/bootstrap-custom.css" rel="stylesheet" />
 
-	<!-- JS resources -->
-	<script type="application/javascript"
-		src="${pageContext.request.contextPath}/static/webjars/jquery/3.1.1-1/jquery.min.js" />
-	<script type="application/javascript"
-			src="${pageContext.request.contextPath}/static/webjars/jquery-ui/1.12.1/jquery-ui.min.js" />
-	<script type="application/javascript"
-		src="${pageContext.request.contextPath}/static/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js" />
-	<script type="application/javascript"
-			src="${pageContext.request.contextPath}/static/webjars/jquery-form/3.51/jquery.form.js" />
 
-	<script type="application/javascript" src="${pageContext.request.contextPath}/static/js/main.js" />
-	
 	<title><tiles:insertAttribute name="title" ignore="true" /></title>
 </head>
 <body>
@@ -51,7 +41,15 @@
 		</div>
 	</div>
 	<tiles:insertAttribute name="footer" />
-
+	<div>
+			<!-- JS resources -->
+	 	<!-- <script type="text/javascript" src="${pageContext.request.contextPath}/static/webjars/jquery/3.1.1-1/jquery.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/static/webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/static/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/static/webjars/jquery-form/3.51/jquery.form.js"></script> 
+		<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/main.js"></script> -->
+	</div>
+	
 </body>
 	</html>
 </jsp:root>
