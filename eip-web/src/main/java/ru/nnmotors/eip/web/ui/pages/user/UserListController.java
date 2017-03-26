@@ -3,6 +3,8 @@ package ru.nnmotors.eip.web.ui.pages.user;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,13 @@ public class UserListController {
 		LOGGER.debug("show user list");
 		model.addAttribute(USER_LIST_DATA_ATTRIBUTE, assebleUserListData(page, filter));
 		return "user.list";
+	}
+	
+	@RequestMapping(value = "list", method = RequestMethod.POST)
+	public String submitFilter(SimpleTextFilter filter,  HttpServletRequest request) {
+		String url = request.getRequestURI();
+		LOGGER.debug("filter");
+		return "redirect: " + url + "?filter=" + filter.getText();
 	}
 
 	UserListData assebleUserListData(int page, String filter) {

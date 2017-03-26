@@ -2,7 +2,9 @@ package ru.nnmotors.eip.web.ui.component.paging;
 
 import java.util.List;
 
-public abstract class AbstractPagingListData<T> {
+public abstract class AbstractPagingListData<T, F> {
+	
+	private F filter;
 	
 	private List<T> items;
 	
@@ -32,6 +34,14 @@ public abstract class AbstractPagingListData<T> {
 
 	public void setItems(List<T> items) {
 		this.items = items;
+	}
+
+	public F getFilter() {
+		return filter;
+	}
+
+	public void setFilter(F filter) {
+		this.filter = filter;
 	}
 
 }

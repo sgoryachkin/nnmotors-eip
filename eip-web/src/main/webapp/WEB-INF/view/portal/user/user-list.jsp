@@ -7,8 +7,18 @@
 	xmlns:eip="urn:jsptagdir:/WEB-INF/tags/eip" version="2.3">
 
 	<div class="container-fluid">
-		<div class="row">Filter</div>
-
+		<div class="row">
+			<form:form class="form-horizontal" method="post"
+				modelAttribute="userListData.filter" enctype="multipart/form-data">
+				<div class="input-group">
+					<input type="text" class="form-control"
+						placeholder="Введите текст для поиска" /> <span
+						class="input-group-btn"> <input class="btn btn-default"
+						type="submit" value="Поиск" />
+					</span>
+				</div>
+			</form:form>
+		</div>
 		<div class="row">
 			<table class="table table-striped">
 				<thead>
