@@ -5,7 +5,6 @@
 
 	<div>
 
-
 		<form:form class="form-horizontal" method="post"
 			modelAttribute="profileEditForm" enctype="multipart/form-data">
 

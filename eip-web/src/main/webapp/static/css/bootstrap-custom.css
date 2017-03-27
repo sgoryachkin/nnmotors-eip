@@ -1,7 +1,5 @@
 @CHARSET "UTF-8";
 
-$spacer-x: 5;
-
 /* .mt-0 {
   margin-top: 0 !important;
 }
@@ -26,6 +24,11 @@ $spacer-x: 5;
   margin-top: ($spacer-x * 3) !important;
 }
 */
+
 .mt-5 {
-  margin-top: 15 !important;
+  margin-top: 15px;
+}
+
+.mb-5 {
+  margin-bottom: 15px;
 }
