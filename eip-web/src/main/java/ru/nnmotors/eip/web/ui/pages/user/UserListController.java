@@ -52,7 +52,7 @@ public class UserListController {
 	public String submitFilter(@RequestParam(defaultValue = "1") Integer page, @Valid SimpleTextFilter userFilterForm, RedirectAttributes redirectAttributes) {
 		LOGGER.debug("filter: " + userFilterForm.getText());
 		redirectAttributes.addAttribute("filter", userFilterForm.getText());
-		redirectAttributes.addAttribute("page", page);
+		//redirectAttributes.addAttribute("page", page);
 		return "redirect:list";
 	}
 

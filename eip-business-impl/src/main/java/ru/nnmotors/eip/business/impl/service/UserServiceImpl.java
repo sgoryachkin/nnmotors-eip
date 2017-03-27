@@ -57,12 +57,12 @@ public class UserServiceImpl extends AbstractRepository<UserProfile, String, Str
 		if (StringUtils.isEmpty(filter)) {
 			return;
 		}
-		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-		Predicate loginPredicate = criteriaBuilder.like(root.get(UserProfile_.login), "%" + filter + "%");
-		Predicate firstNamePredicate = criteriaBuilder.like(root.get(UserProfile_.firstName), "%" + filter + "%");
-		Predicate lastNamePredicate = criteriaBuilder.like(root.get(UserProfile_.lastName), "%" + filter + "%");
-		Predicate middleNamePredicate = criteriaBuilder.like(root.get(UserProfile_.middleName), "%" + filter + "%");
-		criteriaQuery.where(criteriaBuilder.or(loginPredicate, firstNamePredicate, lastNamePredicate, middleNamePredicate));
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		Predicate loginPredicate = cb.like(cb.lower(root.get(UserProfile_.login)), "%" + filter.toLowerCase() + "%");
+		Predicate firstNamePredicate = cb.like(cb.lower(root.get(UserProfile_.firstName)), "%" + filter.toLowerCase() + "%");
+		Predicate lastNamePredicate = cb.like(cb.lower(root.get(UserProfile_.lastName)), "%" + filter.toLowerCase() + "%");
+		Predicate middleNamePredicate = cb.like(cb.lower(root.get(UserProfile_.middleName)), "%" + filter.toLowerCase() + "%");
+		criteriaQuery.where(cb.or(loginPredicate, firstNamePredicate, lastNamePredicate, middleNamePredicate));
 	}
 
 	@Override
