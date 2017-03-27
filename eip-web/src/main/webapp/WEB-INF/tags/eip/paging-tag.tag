@@ -14,10 +14,12 @@
 	<div class="col-md-8 text-right">
 		<ul class="pagination">
 			<c:forEach items="${listData.pages}" var="item">
-				<li
-					class="${item.active ? 'active' : ''} ${item.disable ? 'disabled' : ''}"><a
-					href="${!item.disable ? pageContext.request.contextPath.concat('/user/list?page=').concat(item.page) : ''}"><c:out
-							value="${item.name}" /></a></li>
+				<c:url var="linkUrl" value="" >
+					<c:param name="page" value="${item.page}"/>
+				</c:url>
+				<li	class="${item.active ? 'active' : ''} ${item.disable ? 'disabled' : ''}">
+					<a href="${linkUrl}"><c:out	value="${item.name}" /></a>
+				</li>
 			</c:forEach>
 		</ul>
 	</div>

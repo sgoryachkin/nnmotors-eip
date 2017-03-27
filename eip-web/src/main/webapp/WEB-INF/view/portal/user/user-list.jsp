@@ -9,9 +9,9 @@
 	<div class="container-fluid">
 		<div class="row">
 			<form:form class="form-horizontal" method="post"
-				modelAttribute="userListData.filter" enctype="multipart/form-data">
+				modelAttribute="userFilterForm">
 				<div class="input-group">
-					<input type="text" class="form-control"
+					<form:input path="text" type="text" class="form-control"
 						placeholder="Введите текст для поиска" /> <span
 						class="input-group-btn"> <input class="btn btn-default"
 						type="submit" value="Поиск" />
