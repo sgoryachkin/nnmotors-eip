@@ -20,17 +20,19 @@ import ru.nnmotors.eip.business.api.model.entity.UserProfile;
 import ru.nnmotors.eip.business.api.model.param.ListParam;
 import ru.nnmotors.eip.business.api.service.UserService;
 import ru.nnmotors.eip.web.common.util.UserProfileAssambleUtils;
+import ru.nnmotors.eip.web.ui.component.filter.SimpleTextFilter;
 import ru.nnmotors.eip.web.ui.component.paging.PagindUtils;
+import ru.nnmotors.eip.web.ui.component.paging.PagingData;
 
 @Controller
 @Transactional
 @RequestMapping("user")
 public class UserListController {
 
-	public static final String USER_FILTER_FORM_DATA_ATTRIBUTE = "userFilterFormData";
-	public static final String USER_FILTER_FORM_ATTRIBUTE = "userFilterForm";
-	public static final String USER_LIST_DATA_ATTRIBUTE = "userListData";
-	public static final String USER_PAGING_DATA_ATTRIBUTE = "userPagingData";
+	public static final String USER_FILTER_FORM_DATA_ATTRIBUTE = "filterFormData";
+	public static final String USER_FILTER_FORM_ATTRIBUTE = "filterForm";
+	public static final String USER_LIST_DATA_ATTRIBUTE = "listData";
+	public static final String USER_PAGING_DATA_ATTRIBUTE = "pagingData";
 
 	public static final int PAGE_SIZE = 10;
 
@@ -43,8 +45,14 @@ public class UserListController {
 	public String userProfileEdit(@RequestParam(defaultValue = "1") Integer page,
 			@RequestParam(required = false) String filter, Model model) {
 		LOGGER.debug("show user list");
-		model.addAttribute(USER_LIST_DATA_ATTRIBUTE, assebleUserListData(page, filter));
+		
+		ListParam<String, String> listParam = new ListParam<>(PagindUtils.startIndex(page, PAGE_SIZE), PAGE_SIZE, filter);
+		List<UserProfile> userProfiles = userService.getList(listParam);
+		int count = userService.getListCount(filter);
+			
+		model.addAttribute(USER_LIST_DATA_ATTRIBUTE, assebleUserListData(userProfiles, page, count));
 		model.addAttribute(USER_FILTER_FORM_ATTRIBUTE, new SimpleTextFilter(filter));
+		model.addAttribute(USER_PAGING_DATA_ATTRIBUTE, asseblePagingData(userProfiles, page, count));
 		return "user.list";
 	}
 	
@@ -52,23 +60,21 @@ public class UserListController {
 	public String submitFilter(@RequestParam(defaultValue = "1") Integer page, @Valid SimpleTextFilter userFilterForm, RedirectAttributes redirectAttributes) {
 		LOGGER.debug("filter: " + userFilterForm.getText());
 		redirectAttributes.addAttribute("filter", userFilterForm.getText());
-		//redirectAttributes.addAttribute("page", page);
 		return "redirect:list";
 	}
+	
+	PagingData asseblePagingData(List<UserProfile> userProfiles, int page, int count) {
+		PagingData pagingData = new PagingData();
+		pagingData.setPages(PagindUtils.pagingData(page, PAGE_SIZE, count));
+		return pagingData;
+	}
 
-	UserListData assebleUserListData(int page, String filter) {
+	UserListData assebleUserListData(List<UserProfile> userProfiles, int page, int count) {
 		UserListData userListData = new UserListData();
-		ListParam<String, String> listParam = new ListParam<>(PagindUtils.startIndex(page, PAGE_SIZE), PAGE_SIZE, filter);
-		List<UserProfile> userProfiles = userService.getList(listParam);
 		List<UserListElementData> users = userProfiles.stream()
 				.map(userProfile -> assebleUserListElementData(userProfile)).collect(Collectors.toList());
 		userListData.setItems(users);
-
-		int count = userService.getListCount(filter);
-
-		userListData.setPages(PagindUtils.pagingData(page, PAGE_SIZE, count));
 		userListData.setCount(count);
-
 		return userListData;
 	}
 

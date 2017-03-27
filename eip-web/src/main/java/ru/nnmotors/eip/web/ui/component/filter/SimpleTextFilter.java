@@ -1,6 +1,8 @@
-package ru.nnmotors.eip.web.ui.pages.user;
+package ru.nnmotors.eip.web.ui.component.filter;
 
 public class SimpleTextFilter {
+	
+	private String text;
 	
 	public SimpleTextFilter() {
 		super();
@@ -10,8 +12,6 @@ public class SimpleTextFilter {
 		super();
 		this.text = text;
 	}
-
-	private String text;
 
 	public String getText() {
 		return text;

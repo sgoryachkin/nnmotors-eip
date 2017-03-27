@@ -3,18 +3,18 @@
 	xmlns:form="http://www.springframework.org/tags/form"
 	xmlns:spring="http://www.springframework.org/tags"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:eip="urn:jsptagdir:/WEB-INF/tags/eip" version="2.3">
 
 	<div class="container-fluid">
 		<div class="row">
 			<form:form class="form-horizontal" method="post"
-				modelAttribute="userFilterForm">
+				modelAttribute="filterForm">
 				<div class="input-group">
 					<form:input path="text" type="text" class="form-control"
-						placeholder="Введите текст для поиска" /> <span
-						class="input-group-btn"> <input class="btn btn-default"
-						type="submit" value="Поиск" />
+						placeholder="Введите текст для поиска" />
+					<span class="input-group-btn"> <input
+						class="btn btn-default" type="submit" value="Поиск" />
 					</span>
 				</div>
 			</form:form>
@@ -27,7 +27,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${userListData.items}" var="item">
+					<c:forEach items="${listData.items}" var="item">
 						<tr>
 							<td><a
 								href="${pageContext.request.contextPath}/user/${item.id}/profile"><span
@@ -40,7 +40,13 @@
 			</table>
 		</div>
 		<div class="row">
-			<eip:paging-tag listData="${userListData}"/>
+			<div class="col-md-4 text-left">
+				<c:out
+					value="Показано ${fn:length(listData.items)} из ${listData.count}" />
+			</div>
+			<div class="col-md-8 text-right">
+				<eip:paging pagingData="${pagingData}" />
+			</div>
 		</div>
 	</div>
 </jsp:root>

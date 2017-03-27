@@ -1,8 +1,8 @@
 package ru.nnmotors.eip.web.ui.component.paging;
 
-public class PagingItem {
+public class PagingElementData {
 	
-	public PagingItem(int page, String name, boolean active) {
+	public PagingElementData(int page, String name, boolean active) {
 		super();
 		this.page = page;
 		this.name = name;
