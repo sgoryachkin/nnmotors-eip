@@ -1,5 +1,7 @@
 package ru.nnmotors.eip.web.common.auth;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -12,6 +14,8 @@ import ru.nnmotors.eip.business.api.service.UserService;
 
 public class DelegateAuthenticationProvider implements AuthenticationProvider {
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger(DelegateAuthenticationProvider.class);
+	
 	private AuthenticationProvider authenticationProvider;
 	
 	@Autowired
@@ -21,6 +25,11 @@ public class DelegateAuthenticationProvider implements AuthenticationProvider {
 	@Transactional
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		Authentication authenticationResult = authenticationProvider.authenticate(authentication);
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("User authenticated: " + authenticationResult.getName());
+			LOGGER.debug("User authority: " + authenticationResult.getAuthorities());
+		}
+		
 		if (userService.getUserByLogin(authenticationResult.getName()) == null) {
 			UserProfile user = new UserProfile();
 			user.setLogin(authenticationResult.getName());
