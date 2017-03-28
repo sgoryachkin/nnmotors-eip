@@ -30,7 +30,7 @@
 	</New>
 	<New id="activeDirectoryUrl" class="org.eclipse.jetty.plus.jndi.EnvEntry">
 		<Arg>nnmotors/eip/activeDirectoryUrl</Arg>
-		<Arg type="java.lang.String">ldap://95.79.30.138:388</Arg>
+		<Arg type="java.lang.String">ldap://95.79.30.138:389</Arg>
 		<Arg type="boolean">true</Arg>
 	</New>
 	<New id="activeDirectoryRootDn" class="org.eclipse.jetty.plus.jndi.EnvEntry">

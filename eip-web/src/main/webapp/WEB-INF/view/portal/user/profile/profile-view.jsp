@@ -23,7 +23,7 @@
 					<c:out value="${profile.workPhone}" />
 					<br /> <i class="glyphicon glyphicon-gift"></i> 02.05.1985
 				</p>
-				<!-- Split button -->
+				
 				<div class="btn-group">
 					<a
 						href="${pageContext.request.contextPath}/user/${profile.id}/profile-edit"
