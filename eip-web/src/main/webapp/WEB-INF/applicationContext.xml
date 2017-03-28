@@ -11,17 +11,20 @@
 
 
 	<!-- Import business logic definitions -->
+	
 	<import resource="classpath*:ru/nnmotors/eip/business/impl/config/*.xml" />
+	
+	<!-- Import integration logic definitions -->
+	
+	<import resource="classpath*:ru/nnmotors/eip/integration/impl/config/*.xml" />
 
 	<context:annotation-config />
 
 	<context:component-scan base-package="ru.nnmotors.eip.web.common" />
 
-	<bean id="activeDirectoryAuthenticationProvider" class="ru.nnmotors.eip.dev.auth.DevAuthProvider" />
-
 	<bean id="delegateAuthenticationProvider"
 		class="ru.nnmotors.eip.web.common.auth.DelegateAuthenticationProvider">
-		<property name="authenticationProvider" ref="activeDirectoryAuthenticationProvider" />
+		<property name="authenticationProvider" ref="authenticationProvider" />
 	</bean>
 
 	<security:authentication-manager>

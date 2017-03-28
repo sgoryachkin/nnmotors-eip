@@ -1,4 +1,4 @@
-package ru.nnmotors.eip.dev.auth;
+package ru.nnmotors.eip.integration.impl;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -12,7 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.ldap.authentication.AbstractLdapAuthenticationProvider;
 import org.springframework.security.ldap.userdetails.LdapUserDetailsImpl;
 import org.springframework.security.ldap.userdetails.UserDetailsContextMapper;
+import org.springframework.stereotype.Component;
 
+@Component(value = "authenticationProvider")
 public class DevAuthProvider extends AbstractLdapAuthenticationProvider {
 	
 	public DevAuthProvider() {

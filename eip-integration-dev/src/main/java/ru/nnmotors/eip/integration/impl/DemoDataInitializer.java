@@ -1,4 +1,4 @@
-package ru.nnmotors.eip.business.impl.service;
+package ru.nnmotors.eip.integration.impl;
 
 import java.util.Random;
 

@@ -2,7 +2,6 @@
  <!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
 <Configure class="org.eclipse.jetty.webapp.WebAppContext">
 
-	<!-- Data source for debug with embedded Jetty server -->
 	<New id="eipDataSource" class="org.eclipse.jetty.plus.jndi.Resource">
 		<Arg>jdbc/eipDataSource</Arg>
 		<Arg>
@@ -18,6 +17,25 @@
 	<New id="attachmentStorageUrl" class="org.eclipse.jetty.plus.jndi.EnvEntry">
 		<Arg>nnmotors/eip/attachmentStorageUrl</Arg>
 		<Arg type="java.lang.String">eip-web/target/tmp/</Arg>
+		<Arg type="boolean">true</Arg>
+	</New>
+	
+	
+	<!-- Active Directory -->
+	
+	<New id="activeDirectoryDomain" class="org.eclipse.jetty.plus.jndi.EnvEntry">
+		<Arg>nnmotors/eip/activeDirectoryDomain</Arg>
+		<Arg type="java.lang.String">nnmotors.ru</Arg>
+		<Arg type="boolean">true</Arg>
+	</New>
+	<New id="activeDirectoryUrl" class="org.eclipse.jetty.plus.jndi.EnvEntry">
+		<Arg>nnmotors/eip/activeDirectoryUrl</Arg>
+		<Arg type="java.lang.String">ldap://95.79.30.138:388</Arg>
+		<Arg type="boolean">true</Arg>
+	</New>
+	<New id="activeDirectoryRootDn" class="org.eclipse.jetty.plus.jndi.EnvEntry">
+		<Arg>nnmotors/eip/activeDirectoryRootDn</Arg>
+		<Arg type="java.lang.String"> </Arg>
 		<Arg type="boolean">true</Arg>
 	</New>
 

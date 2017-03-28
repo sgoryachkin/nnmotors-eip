@@ -158,12 +158,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>ru.nnmotors.eip</groupId>
-			<artifactId>eip-dev</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
@@ -179,6 +173,34 @@
 		</dependency>
 
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>ru.nnmotors.eip</groupId>
+					<artifactId>eip-integration-dev</artifactId>
+					<version>${project.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<dependencies>
+				<dependency>
+					<groupId>ru.nnmotors.eip</groupId>
+					<artifactId>eip-integration-prod</artifactId>
+					<version>${project.version}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+
+
+	</profiles>
 
 	<build>
 		<plugins>
