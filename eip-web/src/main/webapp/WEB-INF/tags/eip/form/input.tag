@@ -13,8 +13,8 @@
 
 	<spring:bind path="${path}">
 		<div class="form-group ${status.error ? 'has-error' : ''}">
-			<form:label class="control-label col-sm-2" path="lastName">${label}</form:label>
-			<div class="col-sm-10">
+			<form:label class="control-label col-md-2" path="lastName">${label}</form:label>
+			<div class="col-md-10">
 				<form:input path="${path}" type="${type}" class="form-control"
 					placeholder="${placeHolder}" />
 				<form:errors class="help-block" path="${path}" />

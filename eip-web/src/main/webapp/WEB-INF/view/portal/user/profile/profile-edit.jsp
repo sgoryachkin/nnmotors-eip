@@ -6,21 +6,18 @@
 
 	<div>
 
-		<form:form class="form-horizontal" method="post"
-			modelAttribute="profileEditForm" enctype="multipart/form-data">
-			
+		<form:form class="form-horizontal" method="post" modelAttribute="profileEditForm" enctype="multipart/form-data">
+
 			<eip-form:input path="avatar" type="file" label="Aватар:" placeHolder="Выберите аватар" />
-			<eip-form:input path="lastName" type="text" label="Фамилия" placeHolder="Введите фамилию" />
-			<eip-form:input path="firstName" type="text" label="Имя" placeHolder="Введите имя"/>
-			<eip-form:input path="middleName" type="text" label="Отчество" placeHolder="Введите отчество"/>
-			
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<input class="btn btn-default" type="submit" value="Сохранить" />
-					<input class="btn btn-default" type="reset" value="Сбросить" /> 
-					<input class="btn btn-link" value="Отмена" />
-				</div>
-			</div>
+			<eip-form:input path="lastName" type="text" label="Фамилия:" placeHolder="Введите фамилию" />
+			<eip-form:input path="firstName" type="text" label="Имя:" placeHolder="Введите имя" />
+			<eip-form:input path="middleName" type="text" label="Отчество:" placeHolder="Введите отчество" />
+
+			<eip-form:buttons>
+				<input class="btn btn-primary" type="submit" value="Сохранить" />
+				<input class="btn btn-default" type="reset" value="Сбросить" />
+				<input class="btn btn-default" type="button" value="Отмена" />
+			</eip-form:buttons>
 
 		</form:form>
 

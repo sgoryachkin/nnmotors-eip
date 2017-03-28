@@ -25,7 +25,7 @@
 	
 	<New id="activeDirectoryDomain" class="org.eclipse.jetty.plus.jndi.EnvEntry">
 		<Arg>nnmotors/eip/activeDirectoryDomain</Arg>
-		<Arg type="java.lang.String">nnmotors.ru</Arg>
+		<Arg type="java.lang.String">nnmotors.org</Arg>
 		<Arg type="boolean">true</Arg>
 	</New>
 	<New id="activeDirectoryUrl" class="org.eclipse.jetty.plus.jndi.EnvEntry">

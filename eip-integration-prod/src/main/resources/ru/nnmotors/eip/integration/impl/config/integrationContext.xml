@@ -19,7 +19,7 @@
 	<jee:jndi-lookup id="activeDirectoryUrl" jndi-name="nnmotors/eip/activeDirectoryUrl" expected-type="java.lang.String"/>
 	<jee:jndi-lookup id="activeDirectoryRootDn" jndi-name="nnmotors/eip/activeDirectoryRootDn" expected-type="java.lang.String" default-value=" "/>
 	
-	<bean id="authenticationProvider" class="org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider">
+	<bean id="authenticationProvider" class="ru.nnmotors.eip.integration.impl.ActiveDirectoryAuthProvider">
 		<constructor-arg ref="activeDirectoryDomain"/>
 		<constructor-arg ref="activeDirectoryUrl"/>
 		<constructor-arg ref="activeDirectoryRootDn"/>

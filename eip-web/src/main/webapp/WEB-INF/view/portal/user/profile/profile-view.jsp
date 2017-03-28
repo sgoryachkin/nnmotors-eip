@@ -8,7 +8,7 @@
 		<div class="row">
 			<div class="col-md-4">
 				<img
-					src="${pageContext.request.contextPath}/attachment/download/${profile.avatarUrl}"
+					src="${pageContext.request.contextPath}${profile.avatarUrl}"
 					alt="Фото" class="img-rounded img-responsive" />
 			</div>
 			<div class="col-md-8">

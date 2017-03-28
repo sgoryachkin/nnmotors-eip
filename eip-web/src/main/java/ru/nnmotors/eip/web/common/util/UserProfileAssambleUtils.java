@@ -11,32 +11,30 @@ public final class UserProfileAssambleUtils {
 	}
 
 	public static String fullName(UserProfile user) {
-		if (StringUtils.isEmpty(user.getFirstName()) && StringUtils.isEmpty(user.getMiddleName())
-				&& StringUtils.isEmpty(user.getLastName())) {
-			return user.getLogin();
-		} else {
-			StringBuilder sb = new StringBuilder();
-			if (!StringUtils.isEmpty(user.getFirstName())) {
-				sb.append(user.getFirstName());
-				sb.append(' ');
-			} 
-			if (!StringUtils.isEmpty(user.getMiddleName())) {
-				sb.append(user.getMiddleName());
-				sb.append(' ');
-			}
-			if (!StringUtils.isEmpty(user.getLastName())) {
-				sb.append(user.getLastName());
-				sb.append(' ');
-			}
-			return sb.toString().trim();
+
+		StringBuilder sb = new StringBuilder();
+		if (StringUtils.hasText(user.getFirstName())) {
+			sb.append(user.getFirstName());
+			sb.append(' ');
 		}
+		if (StringUtils.hasText(user.getMiddleName())) {
+			sb.append(user.getMiddleName());
+			sb.append(' ');
+		}
+		if (StringUtils.hasText(user.getLastName())) {
+			sb.append(user.getLastName());
+			sb.append(' ');
+		}
+		String fullName = sb.toString().trim();
+		return StringUtils.hasText(fullName) ? fullName : user.getLogin();
+
 	}
-	
+
 	public static String avatarUrl(UserProfile user, boolean small) {
 		if (user.getAvatar() != null) {
-			return user.getAvatar().getId() + "/avatar.png";
+			return "/attachment/download/" + user.getAvatar().getId() + "/avatar";
 		} else {
-			return "/noavatar";
+			return "/static/img/no-avatar.png";
 		}
 	}
 
