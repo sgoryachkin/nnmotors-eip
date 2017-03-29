@@ -14,12 +14,12 @@ public class Department implements HasId {
     @GeneratedValue
     private Long id;
 	
+    @ManyToOne(targetEntity = Department.class)
+    @JoinColumn
+	private Long parentDepartmentId;
+	
 	@Column
 	private String name;
-	
-    @ManyToOne(targetEntity = UserProfile.class)
-    @JoinColumn
-	private UserProfile director;
 
 	public Long getId() {
 		return id;
@@ -35,14 +35,6 @@ public class Department implements HasId {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public UserProfile getDirector() {
-		return director;
-	}
-
-	public void setDirector(UserProfile director) {
-		this.director = director;
 	}
 
 }
