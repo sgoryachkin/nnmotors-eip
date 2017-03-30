@@ -12,7 +12,7 @@
 			<eip-form:input path="lastName" type="text" label="Фамилия:" placeHolder="Введите фамилию" />
 			<eip-form:input path="firstName" type="text" label="Имя:" placeHolder="Введите имя" />
 			<eip-form:input path="middleName" type="text" label="Отчество:" placeHolder="Введите отчество" />
-	<%-- 		<eip-form:select path="middleName" type="text" label="Подразделение:" placeHolder="Введите отчество" /> --%>
+	        <eip-form:select path="location" type="text" label="Локация:" placeHolder="Введите отчество" url="${pageContext.request.contextPath}/chosen/location"/>
 
 			<eip-form:buttons>
 				<input class="btn btn-primary" type="submit" value="Сохранить" />

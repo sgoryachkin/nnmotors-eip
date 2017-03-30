@@ -26,7 +26,7 @@
 	<link href="${pageContext.request.contextPath}/static/css/bootstrap-custom.css" rel="stylesheet" />
 	
     <!-- JS resources -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/static/webjars/jquery/3.1.1-1/jquery.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/webjars/jquery/3.2.1/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/static/webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/static/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/static/webjars/jquery-form/3.51/jquery.form.js"></script> 

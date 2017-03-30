@@ -11,6 +11,8 @@ public class ProfileEditForm {
     private String lastName;
 
     private String middleName;
+    
+    private Long location;
 
 	public String getFirstName() {
 		return firstName;
@@ -42,6 +44,14 @@ public class ProfileEditForm {
 
 	public void setAvatar(MultipartFile avatar) {
 		this.avatar = avatar;
+	}
+
+	public Long getLocation() {
+		return location;
+	}
+
+	public void setLocation(Long location) {
+		this.location = location;
 	}
 
 }

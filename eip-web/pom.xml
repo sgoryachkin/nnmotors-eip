@@ -127,8 +127,8 @@
 		<!-- Web Jars -->
 
 		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>jquery</artifactId>
+		    <groupId>org.webjars.bower</groupId>
+		    <artifactId>jquery</artifactId>
 		</dependency>
 
 		<dependency>

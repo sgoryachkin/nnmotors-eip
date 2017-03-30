@@ -65,7 +65,7 @@ public class DemoDataInitializer {
 	}
 	
 	private void createDemoLocations() {
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < 25; i++) {
 			Location l = new Location();
 			l.setName(LOCATION_NAMES[rnd.nextInt(LOCATION_NAMES.length - 1)] + rnd.nextInt(10));
 			locationService.create(l);

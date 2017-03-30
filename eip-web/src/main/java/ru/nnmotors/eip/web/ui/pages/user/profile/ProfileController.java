@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import ru.nnmotors.eip.business.api.model.entity.Attachment;
+import ru.nnmotors.eip.business.api.model.entity.Location;
 import ru.nnmotors.eip.business.api.model.entity.UserProfile;
 import ru.nnmotors.eip.business.api.service.AttachmentService;
+import ru.nnmotors.eip.business.api.service.LocationService;
 import ru.nnmotors.eip.business.api.service.UserService;
 import ru.nnmotors.eip.web.common.util.UserProfileAssambleUtils;
 
@@ -36,6 +38,9 @@ public class ProfileController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private LocationService locationService;
 	
 	@Autowired
 	private AttachmentService attachmentStorageService;
@@ -76,6 +81,7 @@ public class ProfileController {
 		profileEditForm.setFirstName(user.getFirstName());
 		profileEditForm.setMiddleName(user.getMiddleName());
 		profileEditForm.setLastName(user.getLastName());
+		profileEditForm.setLocation(user.getLocation() == null ? null : user.getLocation().getId());
 		return profileEditForm;
 	}
 	
@@ -87,6 +93,7 @@ public class ProfileController {
 		user.setFirstName(userForm.getFirstName());
 		user.setLastName(userForm.getLastName());
 		user.setMiddleName(userForm.getMiddleName());
+		user.setLocation(locationService.getReference(userForm.getLocation()));
 		userService.update(user);
 	}
 	

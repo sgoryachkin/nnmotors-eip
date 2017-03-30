@@ -19,7 +19,7 @@ import ru.nnmotors.eip.business.api.service.Repository;
 public abstract class AbstractRepository<T extends HasId, F, O> implements Repository<T, F, O> {
 	
 	@PersistenceContext
-	private EntityManager em;
+	protected EntityManager em;
 	
 	private Class<T> entityClass; 
 	
@@ -31,6 +31,15 @@ public abstract class AbstractRepository<T extends HasId, F, O> implements Repos
 	public Long create(T entity) {
 		em.persist(entity);
 		return entity.getId();
+	}
+	
+	@Override
+	public T getReference(Long id) {
+		T entity = em.getReference(entityClass, id);
+		if (entity == null) {
+			throw new NoResultException(entityClass.getSimpleName() + "  not found: " + id);
+		}
+		return entity;
 	}
 
 	@Override
