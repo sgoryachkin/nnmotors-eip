@@ -49,8 +49,8 @@
 	                    	myChosen.append(option);
 	                    });
 	                    myChosen.trigger("chosen:updated");
-	                    $('.chosen-search input').val($search_param);
-	                    anSelected = myChosen.val();
+	                    //$('.chosen-search input').val($search_param);
+	                    //anSelected = myChosen.val();
 		            });
 		    }
 

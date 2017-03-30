@@ -32,15 +32,6 @@ public abstract class AbstractRepository<T extends HasId, F, O> implements Repos
 		em.persist(entity);
 		return entity.getId();
 	}
-	
-	@Override
-	public T getReference(Long id) {
-		T entity = em.getReference(entityClass, id);
-		if (entity == null) {
-			throw new NoResultException(entityClass.getSimpleName() + "  not found: " + id);
-		}
-		return entity;
-	}
 
 	@Override
 	public T get(Long id) {

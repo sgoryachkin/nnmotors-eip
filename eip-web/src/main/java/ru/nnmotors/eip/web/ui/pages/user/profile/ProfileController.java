@@ -21,7 +21,6 @@ import ru.nnmotors.eip.business.api.model.entity.Attachment;
 import ru.nnmotors.eip.business.api.model.entity.Location;
 import ru.nnmotors.eip.business.api.model.entity.UserProfile;
 import ru.nnmotors.eip.business.api.service.AttachmentService;
-import ru.nnmotors.eip.business.api.service.LocationService;
 import ru.nnmotors.eip.business.api.service.UserService;
 import ru.nnmotors.eip.web.common.util.UserProfileAssambleUtils;
 
@@ -38,9 +37,6 @@ public class ProfileController {
 	
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private LocationService locationService;
 	
 	@Autowired
 	private AttachmentService attachmentStorageService;
@@ -93,7 +89,7 @@ public class ProfileController {
 		user.setFirstName(userForm.getFirstName());
 		user.setLastName(userForm.getLastName());
 		user.setMiddleName(userForm.getMiddleName());
-		user.setLocation(locationService.getReference(userForm.getLocation()));
+		user.setLocation(Location.getReference(userForm.getLocation()));
 		userService.update(user);
 	}
 	
